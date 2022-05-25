@@ -1,4 +1,5 @@
-#welcome 8:24pm on 5/8/22
+#welcome 8:24pm on 5/8/22, end of day one is 10:47pm 5/8/22
+
 #ACCOUNTS FOR LEARNING DONE IN RUBY MODULES 1-6
 #EXPIRED/OLD FILE, USE SONGFILE.RB
 greeting = "Welcome!"

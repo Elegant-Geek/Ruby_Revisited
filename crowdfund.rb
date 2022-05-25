@@ -1,4 +1,5 @@
-#crowdfund (8:43PM on 5/8/22)
+#crowdfund (File created 8:43PM on 5/8/22)
+#end of day one is 8:24pm-10:47pm 5/8/22
 
 # project1 = 'ABC'
 # funding1 = 1000
@@ -22,12 +23,12 @@ class Project
         current_time = Time.new
         current_time.strftime("%-I:%M %p")
     end
-    def fund(value)
+    def fund(value=0)
         @amount += value
         puts "'#{@name}' received $#{value} in funding!"
         puts "'#{@name}' now has $#{@amount} in funding."
     end
-    def defund(value)
+    def defund(value=0)
         @amount -= value
         puts "'#{@name}' has lost $#{value} in funding!"
         puts "'#{@name}' now has $#{@amount} in funding."
@@ -49,5 +50,6 @@ project3 = Project.new('XYZ', 100, 30000)
 
 project3.defund(15)
 project3.fund(1015)
+
 
 
