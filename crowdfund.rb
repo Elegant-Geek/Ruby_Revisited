@@ -1,5 +1,7 @@
 #crowdfund (File created 8:43PM on 5/8/22)
 #end of day one is 8:24pm-10:47pm 5/8/22
+#day two is 5:45pm - .... 9pm 5/24/22
+#day three is 9:55pm - ....  6/8/22 (oof)
 
 # project1 = 'ABC'
 # funding1 = 1000
@@ -13,15 +15,12 @@
 # puts "#{title}#{funding1}"
 
 class Project
-    def initialize(name, amount=0, target_goal=1000)
+
+    def initialize(name, amount=0, target_goal=10000)
         @name = name
         @amount = amount
         @target_goal = target_goal
         puts "New project '#{@name}' ($#{@amount}) is initialized. Target goal is #{@target_goal}."
-    end
-    def time_simplified
-        current_time = Time.new
-        current_time.strftime("%-I:%M %p")
     end
     def fund(value=0)
         @amount += value
@@ -34,8 +33,16 @@ class Project
         puts "'#{@name}' now has $#{@amount} in funding."
     end
     def describe
-        puts "#{@name} has $#{@amount} in funding as of #{@time_simplified}."
+        @current_time = Time.new.strftime("%-m/%-d/%-y at %-I:%M %p")
+            if @amount > @target_goal
+            puts "Project #{@name} has exceeded its $#{@target_goal} target goal with an amount of $#{@amount} as of #{@current_time}."
+            elsif @amount < @target_goal
+                puts "Project #{@name} has $#{@amount} of its $#{@target_goal} goal as of #{@current_time}."
+            else
+                puts "Project #{@name} has reached its target goal of $#{@target_goal}."
+        end
     end
+
     #the default for the amount of funding is 100
     #therefore, $100 gets printed out for the "describe" method.
 
@@ -44,12 +51,23 @@ class Project
     end
 end
 
-project1 = Project.new('ABC')
+project1 = Project.new('ABC', 0, 25500)
 project2 = Project.new('LMN', 2000)
 project3 = Project.new('XYZ', 100, 30000)
 
-project3.defund(15)
-project3.fund(1015)
+# project3.defund(15)
+# project3.fund(1015)
+
+projects = [project1, project2, project3]
+puts "There are currently #{projects.size} projects:"
+projects.each do |p|
+    p.describe
+    p.fund(50000)
+    p.defund(25000)
+    p.fund(500)
+    p.describe
+end
+
 
 
 

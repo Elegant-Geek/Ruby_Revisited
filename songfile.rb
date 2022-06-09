@@ -2,7 +2,8 @@
 #RUN THIS ONE
 #(File created 9:47PM on 5/8/22)
 #end of day one is 8:24pm-10:47pm 5/8/22
-#day two is 5:45pm - .... 5/24/22
+#day two is 5:45pm - .... 9pm 5/24/22
+#day three is 9:55pm - ....  6/8/22 (oof)
 Lowercase_words = %w{and as at but by for from 
     if in into like near nor of off on once 
     onto or over past so than that the till 
@@ -67,6 +68,26 @@ puts pigsonthewing.rank
 
 pigsonthewing.title = "the ballad of buster scruggs"
 puts pigsonthewing.title
+
+song1 = Song.new("In the Flesh?", 100)
+song2 = Song.new("Vera", 200)
+song3 = Song.new("Comfortably Numb", 300)
+
+songs = [song1, song2, song3]
+p songs
+puts "There are #{songs.size} songs in this playlist:"
+songs.each do |song|
+    puts song
+    song.thumbs_up
+    song.thumbs_up
+    song.thumbs_down
+    song.thumbs_up
+    puts song
+end
+
+# songs.each do |song_details|
+#     puts song_details.rank
+# end
 
 
 
