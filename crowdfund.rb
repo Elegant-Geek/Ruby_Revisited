@@ -1,7 +1,7 @@
 #crowdfund (File created 8:43PM on 5/8/22)
 #end of day one is 8:24pm-10:47pm 5/8/22
 #day two is 5:45pm - .... 9pm 5/24/22
-#day three is 9:55pm - ....  6/8/22 (oof)
+#day three is 9:55pm - .... 11:15pm 6/8/22 (oof)
 
 # project1 = 'ABC'
 # funding1 = 1000
@@ -15,7 +15,7 @@
 # puts "#{title}#{funding1}"
 
 class Project
-
+    attr_accessor :name
     def initialize(name, amount=0, target_goal=10000)
         @name = name
         @amount = amount
@@ -35,11 +35,11 @@ class Project
     def describe
         @current_time = Time.new.strftime("%-m/%-d/%-y at %-I:%M %p")
             if @amount > @target_goal
-            puts "Project #{@name} has exceeded its $#{@target_goal} target goal with an amount of $#{@amount} as of #{@current_time}."
+            puts "Project #{@name}: $#{@amount}/#{@target_goal} (over goal) as of #{@current_time}."
             elsif @amount < @target_goal
-                puts "Project #{@name} has $#{@amount} of its $#{@target_goal} goal as of #{@current_time}."
+                puts "Project #{@name}: $#{@amount}/#{@target_goal} (under goal) as of #{@current_time}."
             else
-                puts "Project #{@name} has reached its target goal of $#{@target_goal}."
+                puts "Project #{@name}: $#{@amount}/#{@target_goal} (at goal) as of #{@current_time}."
         end
     end
 
@@ -51,23 +51,43 @@ class Project
     end
 end
 
+class Collection
+    attr_reader :name 
+    def initialize(name)       #this method converts a Collection.new specified title to the correct format when created
+        @name = name.upcase    #upcased all collection titles for now
+        @collection = []
+        puts "Collection '#{@name}' was created."
+    end
+
+    def add_project(project)
+        @collection << project 
+    end
+
+    def run_projects
+        puts "There are currently #{@collection.size} projects:"
+        @collection.each do |project|
+            puts "#{@collection.index(project) + 1}) #{project.name}"
+        end
+
+        @collection.each do |p|
+            p.describe
+            p.fund(50000)
+            p.defund(25000)
+            p.fund(500)
+            p.describe
+        end
+    end
+end
+
 project1 = Project.new('ABC', 0, 25500)
 project2 = Project.new('LMN', 2000)
 project3 = Project.new('XYZ', 100, 30000)
 
-# project3.defund(15)
-# project3.fund(1015)
+my_collection = Collection.new("Jamie's collection of projects")
+my_collection.add_project(project1)
+my_collection.add_project(project2)
+my_collection.add_project(project3)
 
-projects = [project1, project2, project3]
-puts "There are currently #{projects.size} projects:"
-projects.each do |p|
-    p.describe
-    p.fund(50000)
-    p.defund(25000)
-    p.fund(500)
-    p.describe
-end
-
-
+my_collection.run_projects
 
 

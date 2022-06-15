@@ -3,7 +3,9 @@
 #(File created 9:47PM on 5/8/22)
 #end of day one is 8:24pm-10:47pm 5/8/22
 #day two is 5:45pm - .... 9pm 5/24/22
-#day three is 9:55pm - ....  6/8/22 (oof)
+#day three is 9:55pm - ....  11:15pm 6/8/22 (oof)
+#day four is 7:33pm - ....  ??pm 6/14/22 
+
 Lowercase_words = %w{and as at but by for from 
     if in into like near nor of off on once 
     onto or over past so than that the till 
@@ -22,7 +24,7 @@ class Song
         @title = title
         @title = titleize(@title)
         @rank = rank
-        puts "New song '#{@title}' with rank of #{@rank} is initialized."
+        puts "New song '#{@title}' with rank of #{@rank} was created."
     end
 
     def title=(new_title)               #this method converts a Song.new specified title to the correct format when overwritten
@@ -53,41 +55,44 @@ class Song
     end
 end
 
-pigsonthewing = Song.new("Another brick IN the Wall", 100)
-pigsonthewing.describe
-pigsonthewing.thumbs_down
-pigsonthewing.describe
-pigsonthewing.thumbs_up
-pigsonthewing.thumbs_up
-pigsonthewing.describe
-puts pigsonthewing.inspect # a built-in method to see what an object contains.
-puts pigsonthewing
+class Playlist
+    attr_reader :name          #you can read the title (name) of the playlist
+    def initialize(name)       #this method converts a Playlist.new specified title to the correct format when created
+        @name = name.upcase    #upcased all playlist titles for now
+        @list = []
+        puts "Playlist '#{@name}' was created."
+    end
 
-puts pigsonthewing.title
-puts pigsonthewing.rank
+    def add_song(song)
+        @list << song 
+    end
 
-pigsonthewing.title = "the ballad of buster scruggs"
-puts pigsonthewing.title
+    def play
+        puts "There are #{@list.size} songs in this playlist:"
+        @list.each do |song|
+            puts "#{@list.index(song) + 1}) #{song.title}"
+        end
+        @list.each do |song|
+            puts song
+            song.thumbs_up
+            song.thumbs_up
+            song.thumbs_down
+            song.thumbs_up
+            puts song
+        end
+    end
+
+end
 
 song1 = Song.new("In the Flesh?", 100)
 song2 = Song.new("Vera", 200)
 song3 = Song.new("Comfortably Numb", 300)
 
-songs = [song1, song2, song3]
-p songs
-puts "There are #{songs.size} songs in this playlist:"
-songs.each do |song|
-    puts song
-    song.thumbs_up
-    song.thumbs_up
-    song.thumbs_down
-    song.thumbs_up
-    puts song
-end
-
-# songs.each do |song_details|
-#     puts song_details.rank
-# end
+my_list = Playlist.new("Jamie's Pink Floyd Playlist")
+my_list.add_song(song1)
+my_list.add_song(song2)
+my_list.add_song(song3)
+my_list.play
 
 
 
