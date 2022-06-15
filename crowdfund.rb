@@ -2,6 +2,8 @@
 #end of day one is 8:24pm-10:47pm 5/8/22
 #day two is 5:45pm - .... 9pm 5/24/22
 #day three is 9:55pm - .... 11:15pm 6/8/22 (oof)
+#day four is 7:30pm - 8:30pm, resumed at 9:40pm - 1AM  6/14/22 
+
 
 # project1 = 'ABC'
 # funding1 = 1000
@@ -13,6 +15,8 @@
 # puts "\nProjects: \n\t#{project1}\n\t#{project2}\n\t#{project3}"
 # title = project1.upcase.ljust(30, '.')
 # puts "#{title}#{funding1}"
+
+# I DID NOT DO DIE ROLL AND TDD (MODULES 12 + 13) WITH THIS YET
 
 class Project
     attr_accessor :name

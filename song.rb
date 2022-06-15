@@ -19,7 +19,7 @@ class Song
     def initialize(title, rank=0)       #this method converts a Song.new specified title to the correct format when created
         @title = title
         @title = titleize(@title)
-        @rank = rank
+        @rank = rank.abs() # the absolute value prevents anyone from typing in a NEGATIVE rank
         puts "New song '#{@title}' with rank of #{@rank} was created."
     end
 
@@ -42,20 +42,28 @@ class Song
         puts "'#{@title}' has a rank of #{@rank}."
     end
 
-    def score
-        @rank + @title.length
+    def top_ten?
+        @rank <= 10 && @rank != 0   
+    end
+
+    def status
+        top_ten? ? "*Top 10*" : "*Not Top 10*"
     end
 
     def to_s #defines what happens when you use puts on an object of class "Song"
-        "#{@title} (#{@rank}), Score: #{score}"
+       if @rank <= 10 && @rank != 0
+        "#{@title} (#{@rank}) #{status}"
+       else
+        "#{@title} (#{@rank})"
+       end
     end
 end
 
 #code that only runs inside THIS file (songfile.rb relies only on the class code and ignores this if statement code)
 if __FILE__ == $0
-    song1 = Song.new("Run like Hell", 100)
-    song2 = Song.new("The Trial", 200)
-    song3 = Song.new("Outside the Wall", 300)
+    song1 = Song.new("Run like Hell", 4)
+    song2 = Song.new("The Trial", 1)
+    song3 = Song.new("Outside the Wall", 11)
     array = [song1, song2, song3]
     array.each do |song|
         puts song
