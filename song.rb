@@ -59,6 +59,7 @@ if __FILE__ == $0
     array = [song1, song2, song3]
     array.each do |song|
         puts song
+        song.describe
         song.thumbs_up
         song.thumbs_up
         song.thumbs_down

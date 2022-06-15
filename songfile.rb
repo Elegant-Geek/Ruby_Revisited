@@ -23,5 +23,6 @@ my_list.add_song(song3)
 my_list.play
 
 
-
-
+# songg = Song.new("the happiest days of our lives", 0)
+# songg.describe
+# puts songg
