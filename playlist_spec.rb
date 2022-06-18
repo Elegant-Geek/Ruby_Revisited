@@ -22,7 +22,7 @@ context "single song playlist" do
 
     it "initial rank gets converted to a positive value and sorted" do # kind of a "duplicate" test from the one in song_spec.rb
         # expect(@song.rank).to eq(@initial_rank.abs())
-        expect(@song.rank).to eq(1)
+        expect(@song.rank).to eq(10)
     end
 
     it "thumbs up on high number (5-6)" do
@@ -46,13 +46,15 @@ end
 
 context "multiple song playlist" do
     before do 
-    @song1 = Song.new("In the Flesh?", 50) # middle song, should come out to rank = 2
-    @song2 = Song.new("Vera", 100) # last song, should come out to rank = 3
+    @song1 = Song.new("In the Flesh?", 500) # middle song, should come out to rank = 2
+    @song2 = Song.new("Vera", 1000) # last song, should come out to rank = 3
     @song3 = Song.new("Comfortably Numb", 25) # top song, should come out to rank = 1
 
     @playlist.add_song(@song1)
     @playlist.add_song(@song2)
     @playlist.add_song(@song3)
+
+    @playlist.preview #this method sorts before running the game!
     end
     
     it "all three songs are correctly ranked" do
