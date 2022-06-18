@@ -46,9 +46,11 @@ describe Song do
         expect(@initial_rank).to eq(10) #better, new syntax
     end
 
-    # it "has correct description" do
-    #     expect(@song.describe).to eq("'The Happiest Days of Our Lives' has a rank of 10.")
-    # end
+    it "has correct description" do
+        expect do
+            @song.describe
+        end.to output("'#{@song.title}' has a rank of #{@song.rank}.\n").to_stdout
+    end
 
     it "has correct display with 'to_s' (Song)" do
         expect(@song.to_s).to eq("The Happiest Days of Our Lives (10) *Top 10*")

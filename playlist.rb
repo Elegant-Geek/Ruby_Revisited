@@ -1,5 +1,6 @@
 require_relative 'song'
 require_relative 'die'
+require_relative 'playlist_turn'
 
 class Playlist
     attr_reader :name          #you can read the title (name) of the playlist
@@ -21,17 +22,7 @@ class Playlist
         # puts "number rolled is #{number_rolled}"
         @list.each do |song|
             puts song
-            die = Die.new
-            number_rolled = die.roll
-            case number_rolled 
-            when 5..6
-                song.thumbs_up     
-            when 3..4     
-                puts "#{song.title} was skipped."    
-            when 1..2
-                song.thumbs_down                
-            else # (nothing is added if die roll is 3 or 4... or 0 etc.)
-            end
+            PlaylistTurn.take_turn(song)
             puts song
         end
     end
