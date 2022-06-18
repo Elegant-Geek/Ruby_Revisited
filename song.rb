@@ -51,7 +51,7 @@ class Song
     end
 
     def to_s #defines what happens when you use puts on an object of class "Song"
-       if @rank <= 10 && @rank != 0
+       if top_ten?
         "#{@title} (#{@rank}) #{status}"
        else
         "#{@title} (#{@rank})"

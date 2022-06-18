@@ -21,6 +21,23 @@ class Project
         puts "'#{@name}' has lost $#{value} in funding!"
         puts "'#{@name}' now has $#{@amount} in funding."
     end
+
+    def empty?
+        @amount <= 0
+    end
+
+    def status
+        "(No funds!)" if empty?
+    end
+
+    def to_s #defines what happens when you use puts on an object of class "Song"
+        if empty?
+         "#{@name} (#{@amount}) #{status}"
+        else
+         "#{@name} (#{@amount})"
+        end
+     end
+
     def describe
         @current_time = Time.new.strftime("%-m/%-d/%-y at %-I:%M %p")
             if @amount > @target_goal
@@ -34,9 +51,5 @@ class Project
 
     #the default for the amount of funding is 100
     #therefore, $100 gets printed out for the "describe" method.
-
-    def to_s #defines what happens when you use puts on an object of class "Song"
-        "#{@name} (#{@amount})"
-    end
 end
 
