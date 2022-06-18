@@ -14,6 +14,32 @@ describe Project do
         end
     end
 
+    context "project description conditionals" do
+        before do
+            @initial_amount = 10
+            @target_goal = 100
+            @project = Project.new("CVS", @initial_amount, @target_goal)
+            @time = Time.new.strftime("%-m/%-d/%-y at %-I:%M %p")
+        end
+        it "correctly displays under goal" do
+            expect do
+                @project.describe
+              end.to output("Project CVS: $10/100 (under goal) as of #{@time}.\n").to_stdout
+        end
+        it "correctly displays over goal" do
+            @project.amount = 200
+            expect do
+                @project.describe
+              end.to output("Project CVS: $200/100 (over goal) as of #{@time}.\n").to_stdout
+        end
+        it "correctly displays at goal" do
+            @project.amount = 100
+            expect do
+                @project.describe
+              end.to output("Project CVS: $100/100 (at goal) as of #{@time}.\n").to_stdout
+        end
+    end
+
     context "project w/o amount or target goal defined" do
         before do
             @project = Project.new("CVS") # a user types in a negative rank (not ok)

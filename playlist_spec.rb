@@ -10,8 +10,11 @@ end
 context "single playlist song" do
 
     before do
-        @initial_rank = 10
+        @initial_rank = -10
         @song = Song.new("the happiest days of our lives", @initial_rank)
+        @initial_rank = @song.rank #this line had to be added to update the @inital rank
+        #variable in the test file so that it is updated to reflect the initialization of the "rank" attribute
+        #of the project (which changes negative values to their absolute value versions!)
         @playlist.add_song(@song)
     end
 

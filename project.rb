@@ -2,8 +2,8 @@ require_relative 'collection'
 require_relative 'die'
 
 class Project
-    attr_accessor :name
-    attr_reader :amount, :target_goal
+    attr_accessor :name, :amount #you can now write to amount for project to update it
+    attr_reader :target_goal
 
     def initialize(name, amount=0, target_goal=10000)
         @name = name
