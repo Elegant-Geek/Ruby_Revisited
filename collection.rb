@@ -28,6 +28,13 @@ class Collection
                 CollectionTurn.take_turn(p)
                 puts p
             end
+
+        # after all rounds, this describes each project's funding (similar to print stats method for the playlist project):
+        puts "\n#{@name}"
+        @collection.each do |p|
+            p.describe
+        end
+
         end
     end
 end
