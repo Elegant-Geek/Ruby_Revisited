@@ -43,11 +43,17 @@ class Playlist
       
             puts "\n#{@name}"
             @list.each do |song|
-            @list.sort { |a, b| a.rank <=> b.rank }
-            song.rank = @list.index(song) + 1
-            formatted_name = song.title.ljust(20, '.')
-            puts "#{formatted_name} #{song.rank}"
+                puts "TEST TEST TEST #{song.title} AND #{song.rank}"
             end
+            @list.each do |song| #step 1 is sort by rank
+            @list = @list.sort { |a, b| a.rank <=> b.rank }
+            end
+
+            @list.each do |song| #step 2 (after ALL songs are sorted by rank)
+                song.rank = @list.index(song) + 1 # NOW you normalize rank once all songs are sorted
+                formatted_name = song.title.ljust(20, '.')
+                puts "#{formatted_name} #{song.rank}"
+            end 
 
             top_ten_songs, average_songs = @list.partition { |song| song.top_ten? }
 
