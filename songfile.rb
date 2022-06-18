@@ -27,7 +27,7 @@ my_list.add_song(song3)
 my_list.add_song(song4)
 my_list.add_song(song5)
 
-my_list.play(7)
+my_list.play(3) # currently my games have the order staying the same with small game round values. 
 
 my_list.print_stats
 

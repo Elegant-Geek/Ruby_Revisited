@@ -17,11 +17,17 @@ class Playlist
 
     def preview #created this method... it looks very similar to the print_stats method
         puts "There are #{@list.size} songs in this playlist:"
-        @list.each do |song|
+        @list.each do |song| #sort by rank step 1
             @list.sort { |a, b| a.rank <=> b.rank }
-            song.rank = @list.index(song) + 1
-            puts "#{song.rank}) #{song.title}"
             end
+
+            @list.each do |song| #step 2 (after ALL songs are sorted by rank)
+                song.rank = @list.index(song) + 1 # NOW you normalize rank once all songs are sorted
+                # formatted_name = song.title.ljust(20, '.')
+                # puts "#{formatted_name} #{song.rank}"
+                puts "#{song.rank}) #{song.title}"
+            end 
+
     end
 
     def play(rounds=1) #play one round by default
@@ -40,20 +46,20 @@ class Playlist
     end
 
     def print_stats
-      
+      # test chunk
             puts "\n#{@name}"
             @list.each do |song|
-                puts "TEST TEST TEST #{song.title} AND #{song.rank}"
+                puts "TEST (rank before normalization) #{song.title} rank: #{song.rank}"
+                song.rank = @list.index(song) + 1
+                puts "TEST (rank after normalization) #{song.title} rank: #{song.rank}"
             end
-            @list.each do |song| #step 1 is sort by rank
-            @list = @list.sort { |a, b| a.rank <=> b.rank }
-            end
+            # replace the above with the "self.preview" once you can verify that randomness (different song order) is possible
 
-            @list.each do |song| #step 2 (after ALL songs are sorted by rank)
-                song.rank = @list.index(song) + 1 # NOW you normalize rank once all songs are sorted
-                formatted_name = song.title.ljust(20, '.')
-                puts "#{formatted_name} #{song.rank}"
-            end 
+            # @list.each do |song| #step 2 (after ALL songs are sorted by rank)
+            #     song.rank = @list.index(song) + 1 # NOW you normalize rank once all songs are sorted
+            #     formatted_name = song.title.ljust(20, '.')
+            #     puts "#{formatted_name} #{song.rank}"
+            # end 
 
             top_ten_songs, average_songs = @list.partition { |song| song.top_ten? }
 
