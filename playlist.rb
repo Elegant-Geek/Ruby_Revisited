@@ -10,21 +10,62 @@ class Playlist
         puts "Playlist '#{@name}' was created."
     end
 
-    def add_song(song)
+    def add_song(song) #when you add a song, the list re-sorts itself
         @list << song 
+        @list = @list.sort { |a, b| b.rank <=> a.rank }
+        @list.each do |song|
+            song.rank = @list.index(song) + 1
+        end
     end
 
-    def play
+    def play(rounds=1) #play one round by default
         puts "There are #{@list.size} songs in this playlist:"
         @list.each do |song|
-            puts "#{@list.index(song) + 1}) #{song.title}"
+            puts "#{song.rank}) #{song.title}"
         end
+
+        1.upto(rounds) do |round|
+            puts "\nRound #{round}:"
         # puts "number rolled is #{number_rolled}"
-        @list.each do |song|
-            puts song
-            PlaylistTurn.take_turn(song)
-            puts song
+            @list.each do |song|
+                puts song
+                PlaylistTurn.take_turn(song)
+                puts song
+            end
         end
+    end
+
+    def print_stats
+      
+            puts "\n#{@name}"
+            @list.each do |song|
+            @list.sort { |a, b| a.rank <=> b.rank }
+            song.rank = @list.index(song) + 1
+            formatted_name = song.title.ljust(20, '.')
+            puts "#{formatted_name} #{song.rank}"
+            end
+
+            top_ten_songs, average_songs = @list.partition { |song| song.top_ten? }
+
+        puts "\n#{@name}"
+
+        puts "\nTop 10 Songs:" unless top_ten_songs.empty?
+        top_ten_songs.each do |song|
+          puts "#{song.rank}) #{song.title}"
+        end
+
+        if top_ten_songs.empty?
+            puts "\nSongs:"
+            average_songs.each do |song|
+              puts "#{song.title} (#{song.rank})"
+            end
+        else
+            puts "\nOther Songs:" unless average_songs.empty?
+            average_songs.each do |song|
+              puts "#{song.title} (#{song.rank})"
+            end
+        end
+
     end
 
 end

@@ -14,16 +14,20 @@ class Collection
         @collection << project 
     end
 
-    def run_projects
+    def run_projects(rounds=1) #play one round by default
         puts "There are currently #{@collection.size} projects:"
         @collection.each do |project|
             puts "#{@collection.index(project) + 1}) #{project.name}"
         end
 
-        @collection.each do |p|
-            puts p
-            CollectionTurn.take_turn(p)
-            puts p
+        1.upto(rounds) do |round|
+            puts "\nRound #{round}:"
+
+            @collection.each do |p|
+                puts p
+                CollectionTurn.take_turn(p)
+                puts p
+            end
         end
     end
 end

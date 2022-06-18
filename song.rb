@@ -8,9 +8,9 @@ $Lowercase_words = %w{and as at but by for from
     to up upon v. vs vs. with when yet}
 
 class Song
-    attr_reader :rank                   # allows you to print the "rank" attribute outside the Song class (GETTER method)
+    #attr_reader :rank                  # allows you to print the "rank" attribute outside the Song class (GETTER method)
     # attr_writer :title, :rank         # allows you to write to the "title" and "rank" attributes outside the Song class (SETTER method)
-    attr_accessor :title                # allows you to read and write to "title" attribute outside the Song class
+    attr_accessor :title, :rank         # allows you to read and write to "title" and "rank" attribute outside the Song class
 
     def titleize(title) #the actual titleize method (only hangup is "Like" (as a verb) vs "like" (as a preposition))
         title.downcase.split.each_with_index.map{ |x, index| $Lowercase_words.include?(x) && index > 0 ? x : x.capitalize }.join(" ")
@@ -29,12 +29,12 @@ class Song
     end
 
     def thumbs_up
-        @rank += 1
+        @rank -= 1
         puts "'#{@title}' received a thumbs up!"
     end
 
     def thumbs_down
-        @rank -= 1
+        @rank += 1
         puts "'#{@title}' received a thumbs down!"
     end
 
@@ -43,7 +43,9 @@ class Song
     end
 
     def top_ten?
-        @rank <= 10 && @rank != 0   
+        result = case @rank
+        when 1..10 then true
+        end
     end
 
     def status

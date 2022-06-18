@@ -14,14 +14,20 @@ require_relative 'die'
 # (technically require_relative 'song' isnt needed here as well since it is referenced within the playlist file already)
 
 
-song1 = Song.new("In the Flesh?", 100)
-song2 = Song.new("Vera", 200)
-song3 = Song.new("Comfortably Numb", 300)
+song1 = Song.new("In the Flesh?", 50) 
+song2 = Song.new("Vera", 100) # big numbers means it is ranked lowest
+song3 = Song.new("Hey You", 500) # big numbers means it is ranked lowest
+song4 = Song.new("Run Like Hell", 1000) # big numbers means it is ranked lowest
+song5 = Song.new("Comfortably Numb", 25) # small numbers means it is ranked highest
 
 my_list = Playlist.new("Jamie's Pink Floyd Playlist")
 my_list.add_song(song1)
 my_list.add_song(song2)
 my_list.add_song(song3)
-my_list.play
+my_list.add_song(song4)
+my_list.add_song(song5)
+
+my_list.play(3)
+my_list.print_stats
 
 

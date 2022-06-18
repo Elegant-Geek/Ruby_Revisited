@@ -26,6 +26,10 @@ class Project
         @amount <= 0
     end
 
+    def target_goal_met?
+        @amount >= @target_goal
+    end
+
     def status
         "(No funds!)" if empty?
     end

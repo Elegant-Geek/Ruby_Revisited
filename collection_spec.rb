@@ -19,24 +19,25 @@ context "single project collection" do
         #variable in the test file so that it is updated to reflect the initialization of the "amount" attribute
         #of the project (which changes negative values to their absolute value versions!)
         @collection.add_project(@project)
+        @round_amount = 3
     end
 
     it "FUNDS on a high number (5-6)" do
         Die.any_instance.stub(:roll).and_return(5)
-        @collection.run_projects
-        expect(@project.amount).to eq(@initial_amount + 15)
+        @collection.run_projects(@round_amount)
+        expect(@project.amount).to eq(@initial_amount + (15 * (@round_amount)))
     end
 
     it "no change on medium number (3-4)" do
         Die.any_instance.stub(:roll).and_return(3)
-        @collection.run_projects
+        @collection.run_projects(@round_amount)
         expect(@project.amount).to eq(@initial_amount)
     end
 
     it "DEFUNDS on a low number (1-2)" do
         Die.any_instance.stub(:roll).and_return(1)
-        @collection.run_projects
-        expect(@project.amount).to eq(@initial_amount - 10)
+        @collection.run_projects(@round_amount)
+        expect(@project.amount).to eq(@initial_amount - (10 * (@round_amount)))
     end
 end
 

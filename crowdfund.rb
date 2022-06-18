@@ -18,7 +18,7 @@ my_collection = Collection.new("Jamie's collection of projects")
 my_collection.add_project(project1)
 my_collection.add_project(project2)
 my_collection.add_project(project3)
-my_collection.run_projects
+my_collection.run_projects(2)
 
 
 

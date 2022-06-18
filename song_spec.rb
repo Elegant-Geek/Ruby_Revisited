@@ -62,12 +62,12 @@ describe Song do
 
     it "has correct rank after thumbs up" do
         @song.thumbs_up 
-        expect(@song.rank).to eq(11)
+        expect(@song.rank).to eq(9)
     end
 
     it "has correct rank after thumbs down" do
         @song.thumbs_down
-        expect(@song.rank).to eq(9)
+        expect(@song.rank).to eq(11)
     end
 
     it "IS a top 10 song" do
