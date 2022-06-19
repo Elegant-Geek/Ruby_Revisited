@@ -21,11 +21,10 @@ song4 = Song.new("Run Like Hell", 5) # big numbers means it is ranked lowest
 song5 = Song.new("Comfortably Numb", 1) # small numbers means it is ranked highest
 
 my_list = Playlist.new("Jamie's Pink Floyd Playlist")
-my_list.add_song(song1)
-my_list.add_song(song2)
-my_list.add_song(song3)
-my_list.add_song(song4)
-my_list.add_song(song5)
+
+[song1, song2, song3, song4, song5].each do |song| # "don't repeat yourself"
+    my_list.add_song(song)
+end
 
 my_list.play(3) # currently my games have the order staying the same with small game round values. 
 
