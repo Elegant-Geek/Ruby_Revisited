@@ -15,10 +15,12 @@ project2 = Project.new('LMN', 2000)
 project3 = Project.new('XYZ', 100, 30000)
 
 my_collection = Collection.new("Jamie's collection of projects")
-my_collection.add_project(project1)
-my_collection.add_project(project2)
-my_collection.add_project(project3)
-my_collection.run_projects(2)
+
+[project1, project2, project3].each do |project|
+    my_collection.add_project(project)
+end
+
+my_collection.run_projects(2) #runs 2 rounds
 
 
 

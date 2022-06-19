@@ -28,7 +28,7 @@ end
 
 my_list.play(3) # currently my games have the order staying the same with small game round values. 
 
-my_list.print_stats
+my_list.print_stats # currently, this must be called SEPARATELY, not from within the "play" method to get the tests to pass
 
 my_list.show_titles # shows titles in the "array" format using "p"
 

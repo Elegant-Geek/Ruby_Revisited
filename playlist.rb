@@ -34,6 +34,30 @@ class Playlist
 
     end
 
+    def print_stats
+        # test chunk
+              puts "\n#{@name}"
+              @list.each do |song|
+                  puts "TEST (rank before normalization) #{song.title} rank: #{song.rank}"
+                  song.rank = @list.index(song) + 1
+                  puts "TEST (rank after normalization) #{song.title} rank: #{song.rank}"
+              end
+              # replace the above with the "self.sort_songs" once you can verify that randomness (different song order) is possible
+  
+              top_ten_songs, average_songs = @list.partition { |song| song.top_ten? }
+  
+          puts "\n#{@name} Results:"
+  
+          puts "\nTop 10 Songs:" unless top_ten_songs.empty?
+              top_ten_songs.each do |song|
+              puts "#{song.rank}) #{song.title}"
+              end
+          puts "\nOther Songs:" unless average_songs.empty?
+              average_songs.each do |song|
+              puts "#{song.title} (#{song.rank})"
+              end
+      end
+
     def play(rounds=1) #play one round by default
         puts "There are #{@list.size} songs in this playlist:"
         self.sort_songs #use of SELF to call sort_songs on the applicable Playlist object from inside the play method
@@ -47,30 +71,13 @@ class Playlist
                 puts song
             end
         end
+
+        #self.print_stats #activating this code will make two tests fail because sort/normalization is 
+                          #performed within the print stats method which, when enabled INSIDE the "play" method
+                          #makes the math check test fail! (activating this code sorts/normalizes the new ranks
+                          #before the math checker is run, aka after the "play" method is completed)
     end
 
-    def print_stats
-      # test chunk
-            puts "\n#{@name}"
-            @list.each do |song|
-                puts "TEST (rank before normalization) #{song.title} rank: #{song.rank}"
-                song.rank = @list.index(song) + 1
-                puts "TEST (rank after normalization) #{song.title} rank: #{song.rank}"
-            end
-            # replace the above with the "self.sort_songs" once you can verify that randomness (different song order) is possible
 
-            top_ten_songs, average_songs = @list.partition { |song| song.top_ten? }
-
-        puts "\n#{@name} Results:"
-
-        puts "\nTop 10 Songs:" unless top_ten_songs.empty?
-            top_ten_songs.each do |song|
-            puts "#{song.rank}) #{song.title}"
-            end
-        puts "\nOther Songs:" unless average_songs.empty?
-            average_songs.each do |song|
-            puts "#{song.title} (#{song.rank})"
-            end
-    end
 
 end

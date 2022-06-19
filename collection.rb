@@ -14,8 +14,16 @@ class Collection
         @collection << project 
     end
 
+    def print_stats
+        puts "\n#{@name}"
+        @sorted_list = @collection.sort { |a, b| b.amount <=> a.amount }
+        @sorted_list.each do |p|
+            p.describe
+        end
+    end
+
     def run_projects(rounds=1) #play one round by default
-        puts "There are currently #{@collection.size} projects:"
+        puts "There are currently #{@collection.size} projects:" #no sorting called here at first
         @collection.each do |project|
             puts "#{@collection.index(project) + 1}) #{project.name}"
         end
@@ -30,10 +38,7 @@ class Collection
             end
 
         # after all rounds, this describes each project's funding (similar to print stats method for the playlist project):
-        puts "\n#{@name}"
-        @collection.each do |p|
-            p.describe
-        end
+        self.print_stats
 
         end
     end
