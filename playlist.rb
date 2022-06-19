@@ -3,36 +3,40 @@ require_relative 'die'
 require_relative 'playlist_turn'
 
 class Playlist
-    attr_reader :name          #you can read the title (name) of the playlist
+    attr_reader :name, :list          #you can read the title (name) of the playlist
     def initialize(name)       #this method converts a Playlist.new specified title to the correct format when created
         @name = name.upcase    #upcased all playlist titles for now
         @list = []
         puts "Playlist '#{@name}' was created."
     end
 
-    def add_song(song) #when you add a song, the list re-sorts itself
-        @list << song 
-        @list = @list.sort { |a, b| a.rank <=> b.rank }
+    def show_titles
+        p self.list.map(&:title) # p is used within the method to print the array properly, and it is only an array of titles
     end
 
-    def preview #created this method... it looks very similar to the print_stats method
-        puts "There are #{@list.size} songs in this playlist:"
+    def add_song(song) #when you add a song, the list re-sorts itself
+        @list << song 
+        #@list = @list.sort { |a, b| a.rank <=> b.rank }
+        # NOTE: ^^ I disabled the list sorting itself whenever a new song is added. All the responsibility is
+        # now handed over to the sort songs method which 1) sorts all songs in array by rank then 
+        # normalizes the rank values based on the amount of songs in the playlist!
+    end
+
+    def sort_songs #created this method... it looks very similar to the print_stats method
         @list.each do |song| #sort by rank step 1
-            @list.sort { |a, b| a.rank <=> b.rank }
+            @list = @list.sort { |a, b| a.rank <=> b.rank }
             end
 
             @list.each do |song| #step 2 (after ALL songs are sorted by rank)
                 song.rank = @list.index(song) + 1 # NOW you normalize rank once all songs are sorted
-                # formatted_name = song.title.ljust(20, '.')
-                # puts "#{formatted_name} #{song.rank}"
                 puts "#{song.rank}) #{song.title}"
             end 
 
     end
 
     def play(rounds=1) #play one round by default
-
-        self.preview #use of SELF to call preview on the applicable Playlist object from inside the play method
+        puts "There are #{@list.size} songs in this playlist:"
+        self.sort_songs #use of SELF to call sort_songs on the applicable Playlist object from inside the play method
 
         1.upto(rounds) do |round|
             puts "\nRound #{round}:"
@@ -53,35 +57,20 @@ class Playlist
                 song.rank = @list.index(song) + 1
                 puts "TEST (rank after normalization) #{song.title} rank: #{song.rank}"
             end
-            # replace the above with the "self.preview" once you can verify that randomness (different song order) is possible
-
-            # @list.each do |song| #step 2 (after ALL songs are sorted by rank)
-            #     song.rank = @list.index(song) + 1 # NOW you normalize rank once all songs are sorted
-            #     formatted_name = song.title.ljust(20, '.')
-            #     puts "#{formatted_name} #{song.rank}"
-            # end 
+            # replace the above with the "self.sort_songs" once you can verify that randomness (different song order) is possible
 
             top_ten_songs, average_songs = @list.partition { |song| song.top_ten? }
 
-        puts "\n#{@name}"
+        puts "\n#{@name} Results:"
 
         puts "\nTop 10 Songs:" unless top_ten_songs.empty?
-        top_ten_songs.each do |song|
-          puts "#{song.rank}) #{song.title}"
-        end
-
-        if top_ten_songs.empty? # likely will never happen unless pre-ranked is turned off and all rank inputs are > 10
-            puts "\nSongs:"
-            average_songs.each do |song|
-              puts "#{song.title} (#{song.rank})"
+            top_ten_songs.each do |song|
+            puts "#{song.rank}) #{song.title}"
             end
-        else
-            puts "\nOther Songs:" unless average_songs.empty?
+        puts "\nOther Songs:" unless average_songs.empty?
             average_songs.each do |song|
-              puts "#{song.title} (#{song.rank})"
+            puts "#{song.title} (#{song.rank})"
             end
-        end
-
     end
 
 end

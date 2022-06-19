@@ -54,14 +54,19 @@ context "multiple song playlist" do
     @playlist.add_song(@song2)
     @playlist.add_song(@song3)
 
-    @playlist.preview #this method sorts before running the game!
+    @playlist.sort_songs #this method sorts before running the game!
     end
-    
+
+    it "all three songs are correctly sorted in the playlist" do
+        expect(@playlist.show_titles).to eq(["Comfortably Numb", "In the Flesh?", "Vera"])
+    end
+
     it "all three songs are correctly ranked" do
         expect(@song1.rank).to eq(2)
         expect(@song2.rank).to eq(3)
         expect(@song3.rank).to eq(1)
     end
+
 end
 
 end
