@@ -1,6 +1,7 @@
 require_relative 'song'
 require_relative 'die'
 require_relative 'playlist_turn'
+require_relative 'council'
 
 class Playlist
     attr_reader :name, :list          #you can read the title (name) of the playlist
@@ -12,6 +13,14 @@ class Playlist
 
     def show_titles
         p self.list.map(&:title) # p is used within the method to print the array properly, and it is only an array of titles
+    end
+
+    def show_reviewers
+        reviewers = Council::REVIEWERS
+        puts "\nThere are #{reviewers.size} playlist reviewers:"
+        reviewers.each do |r|
+        puts "#{r.name}, #{r.influence}"
+end
     end
 
     def add_song(song) #when you add a song, the list re-sorts itself
@@ -26,12 +35,14 @@ class Playlist
         @list.each do |song| #sort by rank step 1
             @list = @list.sort { |a, b| a.rank <=> b.rank }
             end
-
-            @list.each do |song| #step 2 (after ALL songs are sorted by rank)
-                song.rank = @list.index(song) + 1 # NOW you normalize rank once all songs are sorted
-                puts "#{song.rank}) #{song.title}"
-            end 
-
+    end
+    def normalize_ranks
+        @list.each do |song| #step 2 (after ALL songs are sorted by rank)
+            @previous_rank = song.rank # store previous rank
+            song.rank = @list.index(song) + 1 # NOW you normalize rank once all songs are sorted
+            #song.rank = @list.index(song) + 1 # NOW you normalize rank once all songs are sorted
+            # puts "#{song.rank}) #{song.title}"
+        end 
     end
 
     def print_stats
@@ -59,8 +70,15 @@ class Playlist
       end
 
     def play(rounds=1) #play one round by default
-        puts "There are #{@list.size} songs in this playlist:"
-        self.sort_songs #use of SELF to call sort_songs on the applicable Playlist object from inside the play method
+        puts "\nThere are #{@list.size} songs in this playlist:"
+        self.sort_songs # use of SELF to call sort_songs on the applicable Playlist object from inside the play method
+        self.normalize_ranks # is now separate from sorting songs
+
+        @list.each do |song|
+            puts "#{song.rank}) #{song.title}"
+        end 
+
+        show_reviewers # this method is standalone, no reference to self is needed
 
         1.upto(rounds) do |round|
             puts "\nRound #{round}:"

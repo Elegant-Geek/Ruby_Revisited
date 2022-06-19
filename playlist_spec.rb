@@ -55,6 +55,7 @@ context "multiple song playlist" do
     @playlist.add_song(@song3)
 
     @playlist.sort_songs #this method sorts before running the game!
+    @playlist.normalize_ranks #this normalizes the ranks to the array size
     end
 
     it "all three songs are correctly sorted in the playlist" do
