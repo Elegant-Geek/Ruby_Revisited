@@ -20,27 +20,42 @@ context "single song playlist" do
         # to run different number of rounds in the spec file!
     end
 
-    it "initial rank gets converted to a positive value and sorted" do # kind of a "duplicate" test from the one in song_spec.rb
+    it "initial rank gets converted to a positive value" do # kind of a "duplicate" test from the one in song_spec.rb
         # expect(@song.rank).to eq(@initial_rank.abs())
         expect(@song.rank).to eq(10)
+    end
+
+    it "initial rank gets normalized correctly" do # not a duplicate test, this tests the normalize and multiplier methods
+        # expect(@song.rank).to eq(@initial_rank.abs())
+        @playlist.sort_songs
+        @playlist.normalize_ranks
+        expect(@song.rank).to eq(1)
+    end
+    
+    it "initial rank gets normalized and multiplied correctly" do # not a duplicate test, this tests the normalize and multiplier methods
+        # expect(@song.rank).to eq(@initial_rank.abs())
+        @playlist.sort_songs
+        @playlist.normalize_ranks
+        @playlist.multiply_ranks
+        expect(@song.rank).to eq(100)
     end
 
     it "thumbs up on high number (5-6)" do
         Die.any_instance.stub(:roll).and_return(5)
         @playlist.play(@round_amount)
-        expect(@song.rank).to eq((1) - (1 * @round_amount)) # the (1) represents the new ranking of the only song in the list
+        expect(@song.rank).to eq((100) - (1 * @round_amount)) # the (1) represents the new ranking (normalized and multiplied) of the only song in the list
     end                              # thumbs down makes rank number smaller therefore higher on list!
 
     it "no change on medium number (3-4)" do
         Die.any_instance.stub(:roll).and_return(3)
         @playlist.play(@round_amount)
-        expect(@song.rank).to eq((1))
+        expect(@song.rank).to eq((100))  # 100: The one song in the playlist gets a normalized rank of 1 which gets multiplied to 100.
     end
 
     it "thumbs down on low number (1-2)" do
         Die.any_instance.stub(:roll).and_return(1)
         @playlist.play(@round_amount)
-        expect(@song.rank).to eq((1) + (1 * @round_amount)) # the (1) represents the new ranking of the only song in the list
+        expect(@song.rank).to eq((100) + (1 * @round_amount)) # the (1) represents the new ranking (normalized and multiplied) of the only song in the list
     end                              # thumbs down makes rank bigger therefore lower on list!
 end
 

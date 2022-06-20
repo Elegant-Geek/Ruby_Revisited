@@ -7,7 +7,7 @@
 #day four is 7:30pm - 8:30pm, resumed at 9:40pm - 1am  6/14/22 
 #day five is 12:45pm - 1:30pm before work 6/15/22 
 #day six is 12am - 7:05pm 7 hours straight 6/18/22 
-#day seven is 4:30pm - 6pm 6/19/22 
+#day seven is 4:30pm - 7:45pm 6/19/22 
 
 require_relative 'playlist' # calls the playlist class file 
 require_relative 'song' # calls the song class file 
@@ -17,11 +17,11 @@ require_relative 'council'
 # (technically require_relative 'song' isnt needed here as well since it is referenced within the playlist file already)
 
 
-song1 = Song.new("In the Flesh?", 200) 
-song2 = Song.new("Vera", 300) # big numbers means it is ranked lowest
-song3 = Song.new("Hey You", 400) # big numbers means it is ranked lowest
-song4 = Song.new("Run Like Hell", 500) # big numbers means it is ranked lowest
-song5 = Song.new("Comfortably Numb", 100) # small numbers means it is ranked highest
+song1 = Song.new("In the Flesh?", 2000) 
+song2 = Song.new("Vera", 3000) # big numbers means it is ranked lowest
+song3 = Song.new("Hey You", 4000) # big numbers means it is ranked lowest
+song4 = Song.new("Run Like Hell", 5000) # big numbers means it is ranked lowest
+song5 = Song.new("Comfortably Numb", 1000) # small numbers means it is ranked highest
 
 my_list = Playlist.new("Jamie's Pink Floyd Playlist")
 

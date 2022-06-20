@@ -38,13 +38,16 @@ end
     end
     def normalize_ranks
         @list.each do |song| #step 2 (after ALL songs are sorted by rank)
-            @previous_rank = song.rank # store previous rank
             song.rank = @list.index(song) + 1 # NOW you normalize rank once all songs are sorted
             #song.rank = @list.index(song) + 1 # NOW you normalize rank once all songs are sorted
             # puts "#{song.rank}) #{song.title}"
         end 
     end
-
+    def multiply_ranks
+        @list.each do |song| #step 2 (after ALL songs are sorted by rank)
+            song.rank *= 100 # multiplies each song's rank by 100. This method is used after "normalize ranks" in the play method 
+        end 
+    end
     def print_stats
         # test chunk
               puts "\n#{@name}"
@@ -76,6 +79,10 @@ end
 
         @list.each do |song|
             puts "#{song.rank}) #{song.title}"
+        end 
+        self.multiply_ranks
+        @list.each do |song|
+            puts "Multiplied thingssss #{song.rank}) #{song.title}"
         end 
 
         show_reviewers # this method is standalone, no reference to self is needed
