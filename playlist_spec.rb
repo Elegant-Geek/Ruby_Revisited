@@ -1,5 +1,6 @@
 require_relative "playlist"
 require_relative "die"
+require_relative "council"
 
 describe Playlist do
 
@@ -37,25 +38,27 @@ context "single song playlist" do
         @playlist.sort_songs
         @playlist.normalize_ranks
         @playlist.multiply_ranks
-        expect(@song.rank).to eq(100)
+        expect(@song.rank).to eq(10)
     end
 
     it "thumbs up on high number (5-6)" do
         Die.any_instance.stub(:roll).and_return(5)
+        allow(Council).to receive(:random).and_return(Council::REVIEWERS[0]) # FINALLY got the right code to retrieve roger each roll!
         @playlist.play(@round_amount)
-        expect(@song.rank).to eq((100) - (1 * @round_amount)) # the (1) represents the new ranking (normalized and multiplied) of the only song in the list
+        expect(@song.rank).to eq((10) - (100 * @round_amount)) # the (100) represents the new ranking (normalized and multiplied) of the only song in the list
     end                              # thumbs down makes rank number smaller therefore higher on list!
 
     it "no change on medium number (3-4)" do
         Die.any_instance.stub(:roll).and_return(3)
         @playlist.play(@round_amount)
-        expect(@song.rank).to eq((100))  # 100: The one song in the playlist gets a normalized rank of 1 which gets multiplied to 100.
+        expect(@song.rank).to eq((10))  # 10: The one song in the playlist gets a normalized rank of 1 which gets multiplied to 10.
     end
 
     it "thumbs down on low number (1-2)" do
         Die.any_instance.stub(:roll).and_return(1)
+        allow(Council).to receive(:random).and_return(Council::REVIEWERS[0])
         @playlist.play(@round_amount)
-        expect(@song.rank).to eq((100) + (1 * @round_amount)) # the (1) represents the new ranking (normalized and multiplied) of the only song in the list
+        expect(@song.rank).to eq((10) + (100 * @round_amount)) # the (10) represents the new ranking (normalized and multiplied) of the only song in the list
     end                              # thumbs down makes rank bigger therefore lower on list!
 end
 

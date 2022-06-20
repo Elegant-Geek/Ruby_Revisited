@@ -45,45 +45,20 @@ end
     end
     def multiply_ranks
         @list.each do |song| #step 2 (after ALL songs are sorted by rank)
-            song.rank *= 100 # multiplies each song's rank by 100. This method is used after "normalize ranks" in the play method 
+            song.rank *= 10 # multiplies each song's rank by 10. This method is used after "normalize ranks" in the play method 
         end 
     end
-    def print_stats
-        # test chunk
-              puts "\n#{@name}"
-              @list.each do |song|
-                  puts "TEST (rank before normalization) #{song.title} rank: #{song.rank}"
-                  song.rank = @list.index(song) + 1
-                  puts "TEST (rank after normalization) #{song.title} rank: #{song.rank}"
-              end
-              # replace the above with the "self.sort_songs" once you can verify that randomness (different song order) is possible
-  
-              top_ten_songs, average_songs = @list.partition { |song| song.top_ten? }
-  
-          puts "\n#{@name} Results:"
-  
-          puts "\nTop 10 Songs:" unless top_ten_songs.empty?
-              top_ten_songs.each do |song|
-              puts "#{song.rank}) #{song.title}"
-              end
-          puts "\nOther Songs:" unless average_songs.empty?
-              average_songs.each do |song|
-              puts "#{song.title} (#{song.rank})"
-              end
-      end
 
     def play(rounds=1) #play one round by default
         puts "\nThere are #{@list.size} songs in this playlist:"
-        self.sort_songs # use of SELF to call sort_songs on the applicable Playlist object from inside the play method
-        self.normalize_ranks # is now separate from sorting songs
+        sort_songs # use of SELF to call sort_songs on the applicable Playlist object from inside the play method
+        normalize_ranks # is now separate from sorting songs
 
         @list.each do |song|
             puts "#{song.rank}) #{song.title}"
         end 
-        self.multiply_ranks
-        @list.each do |song|
-            puts "Multiplied thingssss #{song.rank}) #{song.title}"
-        end 
+
+        multiply_ranks
 
         show_reviewers # this method is standalone, no reference to self is needed
 
@@ -103,6 +78,32 @@ end
                           #before the math checker is run, aka after the "play" method is completed)
     end
 
+    def print_stats
+        sort_songs # FIRST SORT FOR PREVIEW/DISPLAY
+        puts "\n#{@name} Final Rankings:"
+        @list.each do |song|
+            puts "#{song.title} (#{song.rank})"
+        end
 
+        normalize_ranks # NOW NORMALIZE RANKINGS
+
+        top_ten_songs, average_songs = @list.partition { |song| song.top_ten? }
+
+    if @list.size > 10
+        puts "\nTop 10 Songs:" 
+        top_ten_songs.each do |song|
+        puts "#{song.rank}) #{song.title}"
+        end
+    puts "\nOther Songs:" 
+        average_songs.each do |song|
+        puts "#{song.rank}) #{song.title}"
+        end
+    else
+        puts "\nTop #{@list.size} Songs:" 
+        @list.each do |song|
+        puts "#{song.rank}) #{song.title}"
+        end
+  end
+    end
 
 end

@@ -28,14 +28,14 @@ class Song
         @title = titleize(@title)
     end
 
-    def thumbs_up
-        @rank -= 1
-        puts "'#{@title}' received a thumbs up!"
+    def thumbs_up(value=1)
+        @rank -= value
+        puts "'#{@title}' received a thumbs up! (-#{value})"
     end
 
-    def thumbs_down
-        @rank += 1
-        puts "'#{@title}' received a thumbs down!"
+    def thumbs_down(value=1)
+        @rank += value
+        puts "'#{@title}' received a thumbs down! (+#{value})"
     end
 
     def describe 
