@@ -6,6 +6,8 @@
 #day five is 12:45pm - 1:30pm before work 6/15/22 
 #day six is 12am - 7:05pm 7 hours straight 6/18/22 
 #day seven is 4:30pm - 8:15pm and 10pm - 12:30am 6/19/22 
+#day eight is 8:55pm - .. 6/20/22 
+
 
 require_relative 'collection' # calls the collection class file 
 require_relative 'project' # calls the project class file 
@@ -13,7 +15,7 @@ require_relative 'die'
 
 project1 = Project.new('ABC', -30, 25500)
 project2 = Project.new('LMN', 2000)
-project3 = Project.new('XYZ', 100, 30000)
+project3 = Project.new('XYZ', 29999, 30000)
 
 my_collection = Collection.new("Jamie's collection of projects")
 
@@ -22,6 +24,6 @@ my_collection = Collection.new("Jamie's collection of projects")
 end
 
 my_collection.run_projects(2) #runs 2 rounds
-
+my_collection.print_stats
 
 

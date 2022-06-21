@@ -43,7 +43,7 @@ class Project
      end
 
     def describe
-        @current_time = Time.new.strftime("%-m/%-d/%-y at %-I:%M %p")
+        @current_time = Time.new.strftime("%-I:%M %p %-m/%-d/%-y")
             if @amount > @target_goal
             puts "Project #{@name}: $#{@amount}/#{@target_goal} (over goal) as of #{@current_time}."
             elsif @amount < @target_goal

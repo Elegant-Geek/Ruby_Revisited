@@ -20,6 +20,21 @@ class Collection
         @sorted_list.each do |p|
             p.describe
         end
+
+        met_goal, under_goal = @sorted_list.partition { |project| project.amount >= project.target_goal }
+             unless met_goal.empty?
+                puts "\nProjects at/over goal:" 
+                met_goal.each do |project|
+                puts "#{project.name}: $#{project.amount}/#{project.target_goal}" 
+                end
+            end
+            unless under_goal.empty?
+                puts "\nProjects under goal:" 
+                under_goal.each do |project|
+                puts "#{project.name}: $#{project.amount}/#{project.target_goal}"
+                end
+            end
+
     end
 
     def run_projects(rounds=1) #play one round by default
@@ -38,8 +53,6 @@ class Collection
             end
 
         # after all rounds, this describes each project's funding (similar to print stats method for the playlist project):
-        self.print_stats
-
         end
     end
 end
