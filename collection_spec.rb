@@ -41,4 +41,18 @@ context "single project collection" do
     end
 end
 
+it "assigns a pledge tier and amount to tally during a project's turn" do
+    collection = Collection.new("Test List")
+    project = Project.new("ABC", 100, 200)
+  
+    collection.add_project(project)
+  
+    collection.run_projects(1) #runs 1 round
+  
+    project.amount.should_not be_zero
+  
+    # or use alternate expectation syntax:
+    # expect(player.points).not_to be_zero
+  end
+
 end

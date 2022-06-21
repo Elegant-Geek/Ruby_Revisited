@@ -1,5 +1,6 @@
 # ***** SONG TEST FILE *******
 require_relative 'project' # calls the project class file 
+require_relative 'pledgepool' # calls the project class file 
 
 describe Project do
 
@@ -83,4 +84,20 @@ describe Project do
         @project.defund
         expect(@project.amount).to eq(@initial_amount)
     end
+
+    it "computes the sum of all pledge donations" do
+        @project.total_amount.should == 0
+      
+        @project.pledge_received(Pledge.new(:gold, 100))
+      
+        @project.total_amount.should == 100
+      
+        @project.pledge_received(Pledge.new(:silver, 75))
+      
+        @project.total_amount.should == 175 # 100+ 75
+      
+        @project.pledge_received(Pledge.new(:bronze, 50))
+      
+        @project.total_amount.should == 225 # 175 + 50
+      end
 end

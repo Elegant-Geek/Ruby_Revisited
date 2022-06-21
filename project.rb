@@ -10,7 +10,16 @@ class Project
         @amount = amount.abs() #no negative initial amount
         @target_goal = target_goal.abs() #no negative target value
         puts "New project '#{@name}' ($#{@amount}) is initialized. Target goal is #{@target_goal}."
+        @pledges_received = Hash.new(0)
     end
+    def pledge_received(pledge)
+        @pledges_received[pledge.name] += pledge.amount #was missing the "s" on @pledges_received which is for the hash
+        puts "#{pledge.name} received a #{pledge.name} pledge worth $#{pledge.amount}."
+        puts "#{@name}'s pledge amounts: $#{@pledge_received}"
+    end
+    def total_amount
+        @pledges_received.values.reduce(0, :+)
+      end
     def fund(value=0)
         @amount += value
         puts "'#{@name}' received $#{value} in funding!"

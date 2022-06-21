@@ -20,7 +20,7 @@ class Playlist
         puts "\nThere are #{reviewers.size} playlist reviewers:"
         reviewers.each do |r|
         puts "#{r.name}, #{r.influence}"
-end
+    end
     end
 
     def add_song(song) #when you add a song, the list re-sorts itself
