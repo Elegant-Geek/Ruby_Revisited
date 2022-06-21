@@ -28,17 +28,17 @@ class Collection
             p.describe
         end
 
-        met_goal, under_goal = @sorted_list.partition { |project| project.amount >= project.target_goal }
+        met_goal, under_goal = @sorted_list.partition { |project| project.total_amount >= project.target_goal }
              unless met_goal.empty?
                 puts "\nProjects at/over goal:" 
                 met_goal.each do |project|
-                puts "#{project.name}: $#{project.amount}/#{project.target_goal}" 
+                puts "#{project.name}: $#{project.total_amount}/#{project.target_goal}" #NOTE:  ALWAYS CALL TOTAL_AMOUNT (sum of all pledges + @amount)
                 end
             end
             unless under_goal.empty?
                 puts "\nProjects under goal:" 
                 under_goal.each do |project|
-                puts "#{project.name}: $#{project.amount}/#{project.target_goal}"
+                puts "#{project.name}: $#{project.total_amount}/#{project.target_goal}" #NOTE:  ALWAYS CALL TOTAL_AMOUNT (sum of all pledges + @amount)
                 end
             end
 

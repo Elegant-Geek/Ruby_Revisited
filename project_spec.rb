@@ -62,7 +62,7 @@ describe Project do
     end
 
     it "has correct display with 'to_s' (Song)" do
-        expect(@project.to_s).to eq("CVS (#{@initial_amount})")
+        expect(@project.to_s).to eq("CVS ($#{@initial_amount})")
     end
 
     it "has correct amount after fund(100)" do
@@ -86,18 +86,19 @@ describe Project do
     end
 
     it "computes the sum of all pledge donations" do
-        @project.total_amount.should == 0
+        @project.total_amount.should == 0 + @initial_amount
       
         @project.pledge_received(Pledge.new(:gold, 100))
       
-        @project.total_amount.should == 100
+        @project.total_amount.should == 100 + @initial_amount 
       
         @project.pledge_received(Pledge.new(:silver, 75))
       
-        @project.total_amount.should == 175 # 100+ 75
+        @project.total_amount.should == 175 + @initial_amount # 100 + 75 @initial amount (10 for now)
       
         @project.pledge_received(Pledge.new(:bronze, 50))
       
-        @project.total_amount.should == 225 # 175 + 50
+        @project.total_amount.should == 225 + @initial_amount # 175 + 50 + @initial amount (10 for now)
       end
+
 end

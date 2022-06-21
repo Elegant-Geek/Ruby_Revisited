@@ -14,21 +14,22 @@ class Project
     end
     def pledge_received(pledge)
         @pledges_received[pledge.name] += pledge.amount #was missing the "s" on @pledges_received which is for the hash
-        puts "#{pledge.name} received a #{pledge.name} pledge worth $#{pledge.amount}."
-        puts "#{@name}'s pledge amounts: $#{@pledge_received}"
+        puts "#{@name} received a #{pledge.name} pledge worth $#{pledge.amount}."
+        puts "#{@name}'s pledge amounts: #{@pledges_received}"
     end
     def total_amount
-        @pledges_received.values.reduce(0, :+)
+        @pledges_received.values.reduce(0, :+) + @amount
       end
+
     def fund(value=0)
         @amount += value
         puts "'#{@name}' received $#{value} in funding!"
-        puts "'#{@name}' now has $#{@amount} in funding."
+        puts "'#{@name}' now has $#{total_amount} in funding." #NOTE:  ALWAYS CALL TOTAL_AMOUNT (sum of all pledges + @amount)
     end
     def defund(value=0)
         @amount -= value
         puts "'#{@name}' has lost $#{value} in funding!"
-        puts "'#{@name}' now has $#{@amount} in funding."
+        puts "'#{@name}' now has $#{total_amount} in funding." #NOTE:  ALWAYS CALL TOTAL_AMOUNT (sum of all pledges + @amount)
     end
 
     def empty?
@@ -45,20 +46,20 @@ class Project
 
     def to_s #defines what happens when you use puts on an object of class "Song"
         if empty?
-         "#{@name} (#{@amount}) #{status}"
+         "#{@name} ($#{total_amount}) #{status}"
         else
-         "#{@name} (#{@amount})"
+         "#{@name} ($#{total_amount})"
         end
      end
 
     def describe
         @current_time = Time.new.strftime("%-I:%M %p %-m/%-d/%-y")
             if @amount > @target_goal
-            puts "Project #{@name}: $#{@amount}/#{@target_goal} (over goal) as of #{@current_time}."
-            elsif @amount < @target_goal
-                puts "Project #{@name}: $#{@amount}/#{@target_goal} (under goal) as of #{@current_time}."
+            puts "Project #{@name}: $#{total_amount}/#{@target_goal} (over goal) as of #{@current_time}."
+            elsif total_amount < @target_goal
+                puts "Project #{@name}: $#{total_amount}/#{@target_goal} (under goal) as of #{@current_time}."
             else
-                puts "Project #{@name}: $#{@amount}/#{@target_goal} (at goal) as of #{@current_time}."
+                puts "Project #{@name}: $#{total_amount}/#{@target_goal} (at goal) as of #{@current_time}."
         end
     end
 

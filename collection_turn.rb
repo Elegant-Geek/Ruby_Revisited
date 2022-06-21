@@ -19,7 +19,5 @@ module CollectionTurn
 
             tier = PledgePool.random
             p.pledge_received(tier)
-
-            #puts "#{p.name} received a #{tier.name} pledge worth $#{tier.amount}."
     end
 end

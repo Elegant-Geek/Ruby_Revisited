@@ -13,9 +13,9 @@ require_relative 'collection' # calls the collection class file
 require_relative 'project' # calls the project class file 
 require_relative 'die'
 
-project1 = Project.new('ABC', -30, 25500)
-project2 = Project.new('LMN', 2000)
-project3 = Project.new('XYZ', 29999, 30000)
+project1 = Project.new('ABC', -30, 100)
+project2 = Project.new('LMN', 800)
+project3 = Project.new('XYZ', 200, 300)
 
 my_collection = Collection.new("Jamie's collection of projects")
 
@@ -23,7 +23,7 @@ my_collection = Collection.new("Jamie's collection of projects")
     my_collection.add_project(project)
 end
 
-my_collection.run_projects(2) #runs 2 rounds
+my_collection.run_projects(3) #runs 2 rounds
 my_collection.print_stats
 
 
