@@ -33,11 +33,11 @@ class Project
     end
 
     def empty?
-        @amount <= 0
+        total_amount <= 0
     end
 
     def target_goal_met?
-        @amount >= @target_goal
+        total_amount >= @target_goal
     end
 
     def status
@@ -54,7 +54,7 @@ class Project
 
     def describe
         @current_time = Time.new.strftime("%-I:%M %p %-m/%-d/%-y")
-            if @amount > @target_goal
+            if total_amount > @target_goal #NOTE:  ALWAYS CALL TOTAL_AMOUNT (sum of all pledges + @amount)
             puts "Project #{@name}: $#{total_amount}/#{@target_goal} (over goal) as of #{@current_time}."
             elsif total_amount < @target_goal
                 puts "Project #{@name}: $#{total_amount}/#{@target_goal} (under goal) as of #{@current_time}."
