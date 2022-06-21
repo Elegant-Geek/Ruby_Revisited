@@ -1,5 +1,6 @@
 require_relative 'project'
 require_relative 'die'
+require_relative 'pledgepool'
 
 module CollectionTurn
 
@@ -15,5 +16,8 @@ module CollectionTurn
                 p.defund(10)               
             else # (nothing is added if die roll is 3 or 4... or 0 etc.)
             end
+
+            tier = PledgePool.random
+            puts "#{p.name} received a #{tier.name} pledge worth $#{tier.amount}."
     end
 end

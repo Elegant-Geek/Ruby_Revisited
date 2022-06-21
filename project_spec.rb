@@ -19,7 +19,7 @@ describe Project do
             @initial_amount = 10
             @target_goal = 100
             @project = Project.new("CVS", @initial_amount, @target_goal)
-            @time = Time.new.strftime("%-m/%-d/%-y at %-I:%M %p")
+            @time = Time.new.strftime("%-I:%M %p %-m/%-d/%-y")
         end
         it "correctly displays under goal" do
             expect do
