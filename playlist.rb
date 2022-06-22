@@ -118,5 +118,32 @@ class Playlist
           add_song(song) 
         end
     end
+    def save_output(to_file="songfile_output.txt")
+        File.open(to_file, "w") do |file|
+          file.puts Time.new.strftime("File updated on %m/%d/%Y at %I:%M %p")
+          file.puts "#{@name} \nPlaylist Output:"
+          normalize_ranks # NOW NORMALIZE RANKINGS
+
+          top_ten_songs, average_songs = @list.partition { |song| song.top_ten? }
+
+            if @list.size > 10
+                file.puts "\nTop 10 Songs:" 
+                top_ten_songs.each do |song|
+                file.puts "#{song.rank}) #{song.title}"
+            end
+            file.puts "\nOther Songs:" 
+                average_songs.each do |song|
+                file.puts "#{song.rank}) #{song.title}"
+                end
+            else
+                file.puts "\nTop #{@list.size} Songs:" 
+                @list.each do |song|
+                file.puts "#{song.rank}) #{song.title}"
+                end
+            end
+
+
+        end          
+    end
       
 end

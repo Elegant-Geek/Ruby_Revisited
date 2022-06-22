@@ -39,6 +39,6 @@ loop do
     end
 end
 
-# my_collection.print_stats
+my_collection.save_output #this goes after the loop
 
 

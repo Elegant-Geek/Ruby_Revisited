@@ -85,4 +85,19 @@ class Collection
           add_project(project)
         end
     end
+    def save_output(to_file="crowdfund_output.txt")
+        File.open(to_file, "w") do |file|
+          file.puts Time.new.strftime("File updated on %m/%d/%Y at %I:%M %p")
+          file.puts "#{@name} \nCrowdfund Output:"
+
+          @collection.each do |project|     
+            file.puts "\nProject #{project.name}: $#{project.total_amount}/#{project.target_goal}"
+            file.puts "Total pledge tier donations for #{project.name}:"
+            project.each_pledge_received do |pledge|
+            file.puts "#{pledge.name}: $#{pledge.amount}"
+            end
+            file.puts "Other donations: $#{project.amount}"
+            end
+        end          
+    end
 end

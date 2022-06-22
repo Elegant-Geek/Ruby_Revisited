@@ -72,5 +72,6 @@ class Project
 
     #the default for the amount of funding is 100
     #therefore, $100 gets printed out for the "describe" method.
+
 end
 

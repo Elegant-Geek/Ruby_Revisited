@@ -39,6 +39,8 @@ loop do
     end
 end
 
+my_list.save_output #this goes after the loop
+
 # my_list.show_titles 
 # ^ shows titles in the "array" format using "p"
 
