@@ -17,27 +17,30 @@ require_relative 'council'
 
 # (technically require_relative 'song' isnt needed here as well since it is referenced within the playlist file already)
 
-song1 = Song.new("In the Flesh?", 100) 
-song2 = Song.new("Vera", 200) # big numbers means it is ranked lowest
-song3 = Song.new("Hey You", 300) # big numbers means it is ranked lowest
-song4 = Song.new("Run Like Hell", 400) # big numbers means it is ranked lowest
-song5 = Song.new("Comfortably Numb", 500) # small numbers means it is ranked highest
-song6 = Song.new("Pigs on the Wing", 600)
-song7 = Song.new("Another Brick in the Wall", 700)
-song8 = Song.new("Is there anybody out there?", 800)
-song9 = Song.new("The Trial", 900)
-song10 = Song.new("Stop", 1000)
-song11 = Song.new("Young Lust", 1100)
 my_list = Playlist.new("Jamie's Pink Floyd Playlist")
+my_list.load_songs(ARGV.shift || "THE_WALL.csv") #plays an entered file OR the default (WALL.cs)
 
-[song1, song2, song3, song4, song5, song6, song7, song8, song9, song10, song11].each do |song| # "don't repeat yourself"
-    my_list.add_song(song)
+loop do
+    puts "\nHow many rounds? ('quit' to exit)"
+    ans = gets.chomp.downcase
+
+    case ans
+    when /^\d+$/
+        if ans.to_i > 20
+            puts "ERROR: Maximum number of rounds allowed: 20." # I will set a limit to 20 rounds
+        else
+        my_list.play(ans.to_i) # converts to integer
+        end
+    when 'quit', 'exit', 'q', 'e', 'ex'
+        my_list.print_stats # currently, this must be called SEPARATELY, not from within the "play" method to get the tests to pass
+        break
+    else
+        puts "Please enter a number or 'quit'"
+    end
 end
 
-my_list.play(5) # currently my games have the order staying the same with small game round values. 
+# my_list.show_titles 
+# ^ shows titles in the "array" format using "p"
 
-my_list.print_stats # currently, this must be called SEPARATELY, not from within the "play" method to get the tests to pass
-
-my_list.show_titles # shows titles in the "array" format using "p"
 
 

@@ -16,7 +16,7 @@ class Song
         title.downcase.split.each_with_index.map{ |x, index| $Lowercase_words.include?(x) && index > 0 ? x : x.capitalize }.join(" ")
     end
    
-    def initialize(title, rank=0)       #this method converts a Song.new specified title to the correct format when created
+    def initialize(title, rank=10000)       #this method converts a Song.new specified title to the correct format when created
         @title = title
         @title = titleize(@title)
         @rank = rank.abs() # the absolute value prevents anyone from typing in a NEGATIVE rank

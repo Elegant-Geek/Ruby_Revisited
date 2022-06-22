@@ -19,10 +19,10 @@ describe Song do
             @song = Song.new("the happiest days of our lives")
         end
 
-        it "has a default rank of 0" do
-            #song.rank.should == 0
+        it "has a default rank of 10000" do
+            #song.rank.should == 10000
             @song = Song.new("the happiest days of our lives")
-            expect(@song.rank).to eq(0) #better, new syntax
+            expect(@song.rank).to eq(10000) #Changed default to 10000 so UNRANKED songs are listed lowest in the playlist (assuming other RANKED songs are < 10000)
         end
 
         it "IS NOT a top 10 song" do

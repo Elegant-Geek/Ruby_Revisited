@@ -1,6 +1,7 @@
 require_relative 'project'
 require_relative 'die'
 require_relative 'collection_turn'
+require 'csv'
 
 class Collection
     attr_reader :name 
@@ -69,4 +70,19 @@ class Collection
         # after all rounds, this describes each project's funding (similar to print stats method for the playlist project):
         end
     end
+    def load_projects(from_file)
+        CSV.foreach(from_file) do |row| #this conditional gets tricky! 
+            unless row[1].to_i == 0  ||  row[2].to_i == 0 #unless one of the rows has a nil value...
+                project = Project.new(row[0], row[1].to_i, row[2].to_i) #.. then input all values regularly.
+            else
+                if row[1].to_i == 0 # if amount (second column) is nil >> 0 in csv,
+                    project = Project.new(row[0], 0, row[2].to_i) # the default gets set to 0. THIS is where default gets assigned.
+                  end
+                if row[2].to_i == 0 # if target_goal (third column) is nil >> 0 in csv,
+                     project = Project.new(row[0], row[1].to_i, 10000) # the default target gets set to 10000. THIS is where default gets assigned.
+                end
+            end
+          add_project(project)
+        end
+      end
 end

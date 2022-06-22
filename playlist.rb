@@ -2,6 +2,7 @@ require_relative 'song'
 require_relative 'die'
 require_relative 'playlist_turn'
 require_relative 'council'
+require 'csv'
 
 class Playlist
     attr_reader :name, :list          #you can read the title (name) of the playlist
@@ -103,7 +104,18 @@ class Playlist
         @list.each do |song|
         puts "#{song.rank}) #{song.title}"
         end
-  end
+    end
     end
 
+    def load_songs(from_file)
+        CSV.foreach(from_file) do |row|
+            if row[1].to_i == 0
+                song = Song.new(row[0], 10000) # THIS is the code that sets nil to 10000 by default so that sorted song is ranked last in playlist
+            else
+                song = Song.new(row[0], row[1].to_i)# << this "index" stuff syntax allows for nil ranks to "pass/fly" (and get reassigned to default of 0) THIS is where default gets assigned.
+            end
+          add_song(song) 
+        end
+    end
+      
 end

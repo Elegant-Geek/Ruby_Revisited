@@ -13,17 +13,32 @@ require_relative 'collection' # calls the collection class file
 require_relative 'project' # calls the project class file 
 require_relative 'die'
 
-project1 = Project.new('ABC', -30, 100)
-project2 = Project.new('LMN', 800)
-project3 = Project.new('XYZ', 200, 300)
-
 my_collection = Collection.new("Jamie's collection of projects")
+my_collection.load_projects(ARGV.shift || "EXAMPLE_PROJECTS.csv") #plays an entered file OR the default (WALL.cs)
 
-[project1, project2, project3].each do |project|
-    my_collection.add_project(project)
+# [project1, project2, project3].each do |project|
+#     my_collection.add_project(project)
+# end
+
+loop do
+    puts "\nHow many rounds? ('quit' to exit)"
+    ans = gets.chomp.downcase
+
+    case ans
+    when /^\d+$/
+        if ans.to_i > 20
+            puts "ERROR: Maximum number of rounds allowed: 20." # I will set a limit to 20 rounds
+        else
+        my_collection.run_projects(ans.to_i) # converts to integer
+        end
+    when 'quit', 'exit', 'q', 'e', 'ex'
+        my_collection.print_stats
+        break
+    else
+        puts "Please enter a number or 'quit'"
+    end
 end
 
-my_collection.run_projects(3) #runs 2 rounds
-my_collection.print_stats
+# my_collection.print_stats
 
 
