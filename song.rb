@@ -53,11 +53,9 @@ class Song
     end
 
     def to_s #defines what happens when you use puts on an object of class "Song"
-       if top_ten?
-        "#{@title} (#{@rank}) #{status}"
-       else
         "#{@title} (#{@rank})"
-       end
+        #"#{@title} (#{@rank}) #{status}"
+        #^^REMOVING "top 10" classification while the score is still computing!
     end
 end
 

@@ -4,7 +4,7 @@ require_relative 'collection_turn'
 require 'csv'
 
 class Collection
-    attr_reader :name 
+    attr_reader :name, :collection
     def initialize(name)       #this method converts a Collection.new specified title to the correct format when created
         @name = name.upcase    #upcased all collection titles for now
         @collection = []
@@ -84,5 +84,5 @@ class Collection
             end
           add_project(project)
         end
-      end
+    end
 end

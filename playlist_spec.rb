@@ -88,4 +88,16 @@ context "multiple song playlist" do
 
 end
 
+context "default values replacing nils (multiple song playlist)" do
+    before do
+    @my_list = Playlist.new("Jamie's Pink Floyd Playlist")
+    @my_list.load_songs("THE_WALL.csv") #plays an entered file OR the default (WALL.csv)
+    end
+
+    it "replaces nil rank values with default value of 10000" do
+        expect(@my_list.list[10].rank).to eq(10000) # "young lust" correctly gets assigned default rank of 10000
+    end
+end
+
+
 end

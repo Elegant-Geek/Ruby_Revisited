@@ -53,7 +53,7 @@ describe Song do
     end
 
     it "has correct display with 'to_s' (Song)" do
-        expect(@song.to_s).to eq("The Happiest Days of Our Lives (10) *Top 10*")
+        expect(@song.to_s).to eq("The Happiest Days of Our Lives (10)") #removed *top 10* display from to_s method
     end
 
     it "has correct status" do

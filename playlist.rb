@@ -113,6 +113,7 @@ class Playlist
                 song = Song.new(row[0], 10000) # THIS is the code that sets nil to 10000 by default so that sorted song is ranked last in playlist
             else
                 song = Song.new(row[0], row[1].to_i)# << this "index" stuff syntax allows for nil ranks to "pass/fly" (and get reassigned to default of 0) THIS is where default gets assigned.
+
             end
           add_song(song) 
         end

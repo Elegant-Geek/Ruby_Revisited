@@ -18,7 +18,7 @@ require_relative 'council'
 # (technically require_relative 'song' isnt needed here as well since it is referenced within the playlist file already)
 
 my_list = Playlist.new("Jamie's Pink Floyd Playlist")
-my_list.load_songs(ARGV.shift || "THE_WALL.csv") #plays an entered file OR the default (WALL.cs)
+my_list.load_songs(ARGV.shift || "THE_WALL.csv") #plays an entered file OR the default (WALL.csv)
 
 loop do
     puts "\nHow many rounds? ('quit' to exit)"

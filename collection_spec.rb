@@ -53,6 +53,26 @@ it "assigns a pledge tier and amount to tally during a project's turn" do
   
     # or use alternate expectation syntax:
     # expect(player.points).not_to be_zero
-  end
+end
+
+# context "default values replacing nils (with default project file)" do
+#     my_colection = Collection.new("Test collection")
+#     # @my_colection.load_projects("EXAMPLE_PROJECTS.csv") #plays an entered file OR the default (WALL.csv)
+
+#         project1 =('ABC', -30, 100)
+#         project2 = Project.new('LMN', 800)
+#         project3 = Project.new('XYZ', 200, 300)
+
+#         [project1, project2, project3].each do |p|
+#             my_collection.add_project(p)
+#         end
+
+#     it "replaces nil amount values with default value of amount=0" do
+#         expect(my_collection.collection[2].amount).to eq(0) # "XYZ,,300" gets filled in with "XYZ,0,300" 
+#     end
+#     it "replaces nil target_goal values with default value of target_goal=10000" do
+#         expect(my_collection.collection[1].target_goal).to eq(10000) # "LMN,800," gets filled in with "LMN,800,1000"
+#     end
+# end
 
 end
