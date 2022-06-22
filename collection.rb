@@ -26,6 +26,11 @@ class Collection
         @sorted_list = @collection.sort { |a, b| b.amount <=> a.amount }
         @sorted_list.each do |p|
             p.describe
+            puts "Total pledge tier donations for #{p.name}:"
+            p.each_pledge_received do |pledge|
+            puts "#{pledge.name}: $#{pledge.amount}"
+          end
+        puts "Other donations: $#{p.amount}"
         end
 
         met_goal, under_goal = @sorted_list.partition { |project| project.total_amount >= project.target_goal }

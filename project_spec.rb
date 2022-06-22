@@ -25,19 +25,19 @@ describe Project do
         it "correctly displays under goal" do
             expect do
                 @project.describe
-              end.to output("Project CVS: $10/100 (under goal) as of #{@time}.\n").to_stdout
+              end.to output("\nProject CVS: $10/100 (under goal) as of #{@time}.\n").to_stdout
         end
         it "correctly displays over goal" do
             @project.amount = 200
             expect do
                 @project.describe
-              end.to output("Project CVS: $200/100 (over goal) as of #{@time}.\n").to_stdout
+              end.to output("\nProject CVS: $200/100 (over goal) as of #{@time}.\n").to_stdout
         end
         it "correctly displays at goal" do
             @project.amount = 100
             expect do
                 @project.describe
-              end.to output("Project CVS: $100/100 (at goal) as of #{@time}.\n").to_stdout
+              end.to output("\nProject CVS: $100/100 (at goal) as of #{@time}.\n").to_stdout
         end
     end
 
@@ -99,6 +99,28 @@ describe Project do
         @project.pledge_received(Pledge.new(:bronze, 50))
       
         @project.total_amount.should == 225 + @initial_amount # 175 + 50 + @initial amount (10 for now)
+      end
+
+      it "yields each pledge donation and its total contribution" do
+        @project.pledge_received(Pledge.new(:bronze, 50))
+        @project.pledge_received(Pledge.new(:bronze, 50))
+        @project.pledge_received(Pledge.new(:silver, 75))
+        @project.pledge_received(Pledge.new(:silver, 75))
+        @project.pledge_received(Pledge.new(:silver, 75))
+        @project.pledge_received(Pledge.new(:silver, 75))
+        @project.pledge_received(Pledge.new(:gold, 100))
+        @project.pledge_received(Pledge.new(:gold, 100))
+      
+        yielded = []
+        @project.each_pledge_received do |pledge|
+          yielded << pledge
+        end
+      
+        yielded.should == [
+          Pledge.new(:bronze, 100),
+          Pledge.new(:silver, 300),
+          Pledge.new(:gold, 200)
+       ]
       end
 
 end

@@ -1,5 +1,6 @@
 require_relative 'collection'
 require_relative 'die'
+require_relative 'pledgepool'
 
 class Project
     attr_accessor :name, :amount #you can now write to amount for project to update it
@@ -55,13 +56,19 @@ class Project
     def describe
         @current_time = Time.new.strftime("%-I:%M %p %-m/%-d/%-y")
             if total_amount > @target_goal #NOTE:  ALWAYS CALL TOTAL_AMOUNT (sum of all pledges + @amount)
-            puts "Project #{@name}: $#{total_amount}/#{@target_goal} (over goal) as of #{@current_time}."
+            puts "\nProject #{@name}: $#{total_amount}/#{@target_goal} (over goal) as of #{@current_time}."
             elsif total_amount < @target_goal
-                puts "Project #{@name}: $#{total_amount}/#{@target_goal} (under goal) as of #{@current_time}."
+                puts "\nProject #{@name}: $#{total_amount}/#{@target_goal} (under goal) as of #{@current_time}."
             else
-                puts "Project #{@name}: $#{total_amount}/#{@target_goal} (at goal) as of #{@current_time}."
+                puts "\nProject #{@name}: $#{total_amount}/#{@target_goal} (at goal) as of #{@current_time}."
         end
     end
+
+    def each_pledge_received
+        @pledges_received.each do |name, amount| # (@pledges_received is the hash)
+          yield Pledge.new(name, amount)
+        end
+      end
 
     #the default for the amount of funding is 100
     #therefore, $100 gets printed out for the "describe" method.
