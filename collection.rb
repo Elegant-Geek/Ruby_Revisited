@@ -91,13 +91,36 @@ class Collection
           file.puts "#{@name} \nCrowdfund Output:"
 
           @collection.each do |project|     
-            file.puts "\nProject #{project.name}: $#{project.total_amount}/#{project.target_goal}"
+            if project.total_amount > project.target_goal
+                file.puts "\nProject #{project.name}: $#{project.total_amount}/#{project.target_goal} (over goal)"
+            elsif project.total_amount == project.target_goal
+                file.puts "\nProject #{project.name}: $#{project.total_amount}/#{project.target_goal} (at goal)"
+            else
+                file.puts "\nProject #{project.name}: $#{project.total_amount}/#{project.target_goal} (under goal)" 
+            end
+
             file.puts "Total pledge tier donations for #{project.name}:"
             project.each_pledge_received do |pledge|
             file.puts "#{pledge.name}: $#{pledge.amount}"
             end
             file.puts "Other donations: $#{project.amount}"
             end
-        end          
+
+            met_goal, under_goal = @collection.partition { |project| project.total_amount >= project.target_goal }
+            unless met_goal.empty?
+               file.puts "\nProjects at/over goal:" 
+               met_goal.each do |project|
+               file.puts "#{project.name}: $#{project.total_amount}/#{project.target_goal}" #NOTE:  ALWAYS CALL TOTAL_AMOUNT (sum of all pledges + @amount)
+               end
+           end
+           unless under_goal.empty?
+               file.puts "\nProjects under goal:" 
+               under_goal.each do |project|
+               file.puts "#{project.name}: $#{project.total_amount}/#{project.target_goal}" #NOTE:  ALWAYS CALL TOTAL_AMOUNT (sum of all pledges + @amount)
+               end
+           end
+        end 
+       
+  
     end
 end

@@ -49,11 +49,19 @@ class Playlist
             song.rank *= 10 # multiplies each song's rank by 10. This method is used after "normalize ranks" in the play method 
         end 
     end
+    def save_original_list_order
+        @original_list = @list # stores original list
+        # puts "Original list order:"
+        # @original_list.each do |song|
+        #     puts "#{song.rank}) #{song.title}"
+        # end 
+    end
 
     def play(rounds=1) #play one round by default
         puts "\nThere are #{@list.size} songs in this playlist:"
         sort_songs # use of SELF to call sort_songs on the applicable Playlist object from inside the play method
         normalize_ranks # is now separate from sorting songs
+        save_original_list_order
 
         @list.each do |song|
             puts "#{song.rank}) #{song.title}"
@@ -120,14 +128,18 @@ class Playlist
     end
     def save_output(to_file="songfile_output.txt")
         File.open(to_file, "w") do |file|
-          file.puts Time.new.strftime("File updated on %m/%d/%Y at %I:%M %p")
-          file.puts "#{@name} \nPlaylist Output:"
+            file.puts Time.new.strftime("File updated on %m/%d/%Y at %I:%M %p")
+            file.puts "\nOriginal list order:"
+                @original_list.each do |song|
+                file.puts "#{@original_list.index(song) + 1}) #{song.title}"
+            end 
+          file.puts "\nNew list order:"
           normalize_ranks # NOW NORMALIZE RANKINGS
 
           top_ten_songs, average_songs = @list.partition { |song| song.top_ten? }
 
             if @list.size > 10
-                file.puts "\nTop 10 Songs:" 
+                file.puts "Top 10 Songs:" # literally copied from print stats but with "file.puts" not "puts"
                 top_ten_songs.each do |song|
                 file.puts "#{song.rank}) #{song.title}"
             end
@@ -141,9 +153,9 @@ class Playlist
                 file.puts "#{song.rank}) #{song.title}"
                 end
             end
+            
+        end     
 
-
-        end          
     end
       
 end
