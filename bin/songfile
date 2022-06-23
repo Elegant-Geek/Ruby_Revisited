@@ -20,7 +20,6 @@ require_relative '../lib/songfile/classic_song'
 # (technically require_relative 'song' isnt needed here as well since it is referenced within the playlist file already)
 
 my_list = Songfile::Playlist.new("Jamie's Pink Floyd Playlist")
-# my_list.load_songs(ARGV.shift || "THE_WALL.csv") 
 default_player_file = File.join(File.dirname(__FILE__), "THE_WALL.csv") #plays an entered file OR the default (WALL.csv)
 my_list.load_songs(ARGV.shift || default_player_file)
 
