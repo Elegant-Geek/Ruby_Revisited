@@ -134,7 +134,6 @@ class Playlist
                 file.puts "#{@original_list.index(song) + 1}) #{song.title}"
             end 
           file.puts "\nNew list order:"
-          normalize_ranks # NOW NORMALIZE RANKINGS
 
           top_ten_songs, average_songs = @list.partition { |song| song.top_ten? }
 

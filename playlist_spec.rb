@@ -95,7 +95,7 @@ context "default values replacing nils (multiple song playlist)" do
     end
 
     it "replaces nil rank values with default value of 10000" do
-        expect(@my_list.list[10].rank).to eq(10000) # "young lust" correctly gets assigned default rank of 10000
+        expect(@my_list.list[11].rank).to eq(10000) # "young lust" correctly gets assigned default rank of 10000
     end
 end
 
