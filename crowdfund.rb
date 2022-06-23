@@ -8,13 +8,13 @@
 #day seven is 4:30pm - 8:15pm and 10pm - 12:30am 6/19/22 
 #day eight is 8:55pm - 11:45pm 6/20/22 
 #day nine is 11:47pm - 5:34AM!! 6/22/22 (night)
-#day ten is 8:08pm - ! 6/22/22 (day)
+#day ten is 8:08pm - 12:24am and 12:50am - 6/22/22 (day)
 
 require_relative 'collection' # calls the collection class file 
 require_relative 'project' # calls the project class file 
 require_relative 'die'
 
-my_collection = Collection.new("Jamie's collection of projects")
+my_collection = Crowdfund::Collection.new("Jamie's collection of projects")
 my_collection.load_projects(ARGV.shift || "EXAMPLE_PROJECTS.csv") #plays an entered file OR the default (WALL.cs)
 
 # [project1, project2, project3].each do |project|

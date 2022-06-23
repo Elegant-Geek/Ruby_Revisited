@@ -8,7 +8,7 @@
 #day seven is 4:30pm - 8:15pm and 10pm - 12:30am 6/19/22 
 #day eight is 8:55pm - 11:45pm 6/20/22 
 #day nine is 11:47pm - 5:34AM!! 6/22/22 (night)
-#day ten is 8:08pm - ! 6/22/22 (day)
+#day ten is 8:08pm - 12:24am and 12:50am - 6/22/22 (day)
 
 require_relative 'playlist' # calls the playlist class file 
 require_relative 'song' # calls the song class file 
@@ -18,9 +18,9 @@ require_relative 'classic_song'
 
 # (technically require_relative 'song' isnt needed here as well since it is referenced within the playlist file already)
 
-my_list = Playlist.new("Jamie's Pink Floyd Playlist")
+my_list = Songfile::Playlist.new("Jamie's Pink Floyd Playlist")
 my_list.load_songs(ARGV.shift || "THE_WALL.csv") #plays an entered file OR the default (WALL.csv)
-classic_song = ClassicSong.new("Time") #default rank of 10000 assigned bc not specified, then halved bc it is a ClassicSong
+classic_song = Songfile::ClassicSong.new("Time") #default rank of 10000 assigned bc not specified, then halved bc it is a ClassicSong
 my_list.add_song(classic_song)
 
 loop do
