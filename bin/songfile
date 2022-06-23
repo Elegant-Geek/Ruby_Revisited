@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 #(File created 9:47pm on 5/8/22)
 #end of day one is 8:24pm-10:47pm 5/8/22
 #day two is 5:45pm - .... 9pm 5/24/22
@@ -10,18 +11,22 @@
 #day nine is 11:47pm - 5:34AM!! 6/22/22 (night)
 #day ten is 8:08pm - 12:24am and 12:50am - 6/22/22 (day)
 
-require_relative 'playlist' # calls the playlist class file 
-require_relative 'song' # calls the song class file 
-require_relative 'die'
-require_relative 'council'
-require_relative 'classic_song'
+require_relative '../lib/songfile/playlist' # calls the playlist class file 
+require_relative '../lib/songfile/song' # calls the song class file 
+require_relative '../lib/songfile/die'
+require_relative '../lib/songfile/council'
+require_relative '../lib/songfile/classic_song'
 
 # (technically require_relative 'song' isnt needed here as well since it is referenced within the playlist file already)
 
 my_list = Songfile::Playlist.new("Jamie's Pink Floyd Playlist")
-my_list.load_songs(ARGV.shift || "THE_WALL.csv") #plays an entered file OR the default (WALL.csv)
-classic_song = Songfile::ClassicSong.new("Time") #default rank of 10000 assigned bc not specified, then halved bc it is a ClassicSong
-my_list.add_song(classic_song)
+# my_list.load_songs(ARGV.shift || "THE_WALL.csv") 
+default_player_file = File.join(File.dirname(__FILE__), "THE_WALL.csv") #plays an entered file OR the default (WALL.csv)
+my_list.load_songs(ARGV.shift || default_player_file)
+
+#Lines 28 and 29 can be uncommented to add a "classic song" from within the driving program file!
+#classic_song = Songfile::ClassicSong.new("Time") #default rank of 10000 assigned bc not specified, then halved bc it is a ClassicSong
+#my_list.add_song(classic_song)
 
 loop do
     puts "\nHow many rounds? ('quit' to exit)"

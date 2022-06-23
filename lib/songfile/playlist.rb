@@ -26,8 +26,8 @@ module Songfile
 
         def add_song(song) #when you add a song, the list re-sorts itself
             @list << song 
+            @list = @list.sort { |a, b| a.rank <=> b.rank } #this line is critical to have so that original song order by rank is displayed by the text output!
             @original_list = @list # whenever a song is added, the list is stored
-            #@list = @list.sort { |a, b| a.rank <=> b.rank }
             # NOTE: ^^ I disabled the list sorting itself whenever a new song is added. All the responsibility is
             # now handed over to the sort songs method which 1) sorts all songs in array by rank then 
             # normalizes the rank values based on the amount of songs in the playlist!
@@ -87,12 +87,17 @@ module Songfile
                 puts "#{song.title} (#{song.rank})"
             end
 
+            puts "\nOriginal list order:"
+                    @original_list.each do |song|
+                    puts "#{@original_list.index(song) + 1}) #{song.title}"
+                end 
+
             normalize_ranks # NOW NORMALIZE RANKINGS
 
             top_ten_songs, average_songs = @list.partition { |song| song.top_ten? }
-
+        puts "\nNew list order:"
         if @list.size > 10
-            puts "\nTop 10 Songs:" 
+            puts "Top 10 Songs:" 
             top_ten_songs.each do |song|
             puts "#{song.rank}) #{song.title}"
             end

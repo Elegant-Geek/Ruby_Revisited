@@ -1,6 +1,9 @@
-require_relative "playlist"
-require_relative "die"
-require_relative "council"
+# require_relative "playlist"
+require 'songfile/playlist'
+# require_relative "die"
+require 'songfile/die'
+# require_relative "council"
+require 'songfile/council'
 module Songfile
     describe Playlist do
 
@@ -91,7 +94,9 @@ module Songfile
         context "default values replacing nils (multiple song playlist)" do
             before do
             @my_list = Playlist.new("Jamie's Pink Floyd Playlist")
-            @my_list.load_songs("THE_WALL.csv") #plays an entered file OR the default (WALL.csv)
+
+            default_player_file = File.join(File.dirname(__FILE__), "../../bin/THE_WALL.csv") #plays an entered file OR the default (WALL.csv)
+            @my_list.load_songs(ARGV.shift || default_player_file)
             end
 
             it "replaces nil rank values with default value of 10000" do

@@ -1,4 +1,5 @@
-require_relative "council"
+# require_relative "council"
+require 'songfile/council'
 module Songfile
   describe Reviewer do
 

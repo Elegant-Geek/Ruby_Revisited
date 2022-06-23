@@ -1,5 +1,7 @@
 # ***** SONG TEST FILE *******
-require_relative 'song' # calls the song class file 
+# require_relative 'song' # calls the song class file 
+require 'songfile/song'
+
 module Songfile
     describe Song do
 
