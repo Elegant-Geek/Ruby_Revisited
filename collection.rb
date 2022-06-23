@@ -62,16 +62,16 @@ class Collection
             puts "\nRound #{round}:"
 
             @collection.each do |p|
-                puts p
+                puts "Start: #{p}"
                 CollectionTurn.take_turn(p)
-                puts p
+                puts "End: #{p}"
             end
 
         # after all rounds, this describes each project's funding (similar to print stats method for the playlist project):
         end
     end
     def load_projects(from_file)
-        CSV.foreach(from_file) do |row| #this conditional gets tricky! 
+        CSV.foreach(from_file, 'r:bom|utf-8') do |row| #this conditional gets tricky! 
             unless row[1].to_i == 0  ||  row[2].to_i == 0 #unless one of the rows has a nil value...
                 project = Project.new(row[0], row[1].to_i, row[2].to_i) #.. then input all values regularly.
             else

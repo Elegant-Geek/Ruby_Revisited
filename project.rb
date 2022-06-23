@@ -25,12 +25,12 @@ class Project
     def fund(value=0)
         @amount += value
         puts "'#{@name}' received $#{value} in funding!"
-        puts "'#{@name}' now has $#{total_amount} in funding." #NOTE:  ALWAYS CALL TOTAL_AMOUNT (sum of all pledges + @amount)
+        #puts "'#{@name}' now has $#{total_amount} in funding." #NOTE:  ALWAYS CALL TOTAL_AMOUNT (sum of all pledges + @amount)
     end
     def defund(value=0)
         @amount -= value
         puts "'#{@name}' has lost $#{value} in funding!"
-        puts "'#{@name}' now has $#{total_amount} in funding." #NOTE:  ALWAYS CALL TOTAL_AMOUNT (sum of all pledges + @amount)
+        #puts "'#{@name}' now has $#{total_amount} in funding." #NOTE:  ALWAYS CALL TOTAL_AMOUNT (sum of all pledges + @amount)
     end
 
     def empty?

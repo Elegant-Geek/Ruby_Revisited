@@ -29,12 +29,12 @@ class Song
 
     def thumbs_up(value=1)
         @rank -= value
-        puts "'#{@title}' received a thumbs up! (-#{value})"
+        puts "'#{@title}' received a thumbs up!"
     end
 
     def thumbs_down(value=1)
         @rank += value
-        puts "'#{@title}' received a thumbs down! (+#{value})"
+        puts "'#{@title}' received a thumbs down!"
     end
 
     def describe 

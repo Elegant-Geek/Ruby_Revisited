@@ -109,7 +109,7 @@ class Playlist
     end
 
     def load_songs(from_file)
-        CSV.foreach(from_file) do |row|
+        CSV.foreach(from_file, 'r:bom|utf-8') do |row|
             if row[1].to_i == 0
                 song = Song.new(row[0], 10000) # THIS is the code that sets nil to 10000 by default so that sorted song is ranked last in playlist
             else
