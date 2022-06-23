@@ -14,11 +14,14 @@ require_relative 'playlist' # calls the playlist class file
 require_relative 'song' # calls the song class file 
 require_relative 'die'
 require_relative 'council'
+require_relative 'classic_song'
 
 # (technically require_relative 'song' isnt needed here as well since it is referenced within the playlist file already)
 
 my_list = Playlist.new("Jamie's Pink Floyd Playlist")
 my_list.load_songs(ARGV.shift || "THE_WALL.csv") #plays an entered file OR the default (WALL.csv)
+classic_song = ClassicSong.new("Time") #default rank of 10000 assigned bc not specified, then halved bc it is a ClassicSong
+my_list.add_song(classic_song)
 
 loop do
     puts "\nHow many rounds? ('quit' to exit)"

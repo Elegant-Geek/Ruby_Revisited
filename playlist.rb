@@ -26,6 +26,7 @@ class Playlist
 
     def add_song(song) #when you add a song, the list re-sorts itself
         @list << song 
+        @original_list = @list # whenever a song is added, the list is stored
         #@list = @list.sort { |a, b| a.rank <=> b.rank }
         # NOTE: ^^ I disabled the list sorting itself whenever a new song is added. All the responsibility is
         # now handed over to the sort songs method which 1) sorts all songs in array by rank then 
@@ -49,20 +50,12 @@ class Playlist
             song.rank *= 10 # multiplies each song's rank by 10. This method is used after "normalize ranks" in the play method 
         end 
     end
-    def save_original_list_order
-        @original_list = @list # stores original list
-        # puts "Original list order:"
-        # @original_list.each do |song|
-        #     puts "#{song.rank}) #{song.title}"
-        # end 
-    end
+
 
     def play(rounds=1) #play one round by default
         puts "\nThere are #{@list.size} songs in this playlist:"
         sort_songs # use of SELF to call sort_songs on the applicable Playlist object from inside the play method
         normalize_ranks # is now separate from sorting songs
-        save_original_list_order
-
         @list.each do |song|
             puts "#{song.rank}) #{song.title}"
         end 

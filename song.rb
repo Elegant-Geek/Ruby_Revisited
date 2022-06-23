@@ -17,8 +17,7 @@ class Song
     end
    
     def initialize(title, rank=10000)       #this method converts a Song.new specified title to the correct format when created
-        @title = title
-        @title = titleize(@title)
+        @title = titleize(title)
         @rank = rank.abs() # the absolute value prevents anyone from typing in a NEGATIVE rank
         puts "New song '#{@title}' with rank of #{@rank} was created."
     end
