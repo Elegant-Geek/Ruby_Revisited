@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-    s.name         = "music_playlist_reviewing"
+    s.name         = "songfile"
     s.version      = "1.0.0"
     s.author       = "Jamie Clark"
     s.email        = "clarkcjamie@gmail.com"
