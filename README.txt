@@ -18,5 +18,3 @@ Column 2: lists integer values for your song ranks (Any negative character "-" w
 Low rank # means you want the song ranked higher on the playlist.
 High rank # means you want the song ranked lower on the playlist.
 
-TO TEST ALL PROGRAM SPEC FILES:
-rspec (not "rspec .")
