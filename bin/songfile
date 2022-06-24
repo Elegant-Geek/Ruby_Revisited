@@ -10,6 +10,7 @@
 #day eight is 8:55pm - 11:45pm 6/20/22 
 #day nine is 11:47pm - 5:34am!! 6/22/22 (night)
 #day ten is 8:08pm - 12:24am and 12:50am - 3:30am 6/22/22 (day)
+#day eleven is 12:24pm - 2pm 6/23/22 (Thanks Mike for gem help!)
 
 require_relative '../lib/songfile/playlist' # calls the playlist class file 
 require_relative '../lib/songfile/song' # calls the song class file 
